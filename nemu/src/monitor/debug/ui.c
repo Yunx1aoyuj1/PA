@@ -113,7 +113,16 @@ static int cmd_x(char *args){
   for(i = 0;i < times; i ++){
     data = vaddr_read(addr,4);    //如何调用，怎么传递参数，请阅读代码
     //每次循环将读取到的数据用 printf 打印出来
-    printf("0x%08x 0x%08x ... %d\n",addr,data,data);//如果你不知道应该打印什么，可以参考参考输出形式
+    printf("0x%08x 0x%08x ...",addr,data);//如果你不知道应该打印什么，可以参考参考输出形式
+    for (int j = 0; j < 4; j++){
+      int a[2];
+      a[0] = data%16;
+      data /= 16 ;
+      a[1] = data%16;
+      data /= 16;
+      printf("%X%X ",a[0],a[1]);
+    }
+    printf("\n");
     addr += 4;
   }
   return 0;
