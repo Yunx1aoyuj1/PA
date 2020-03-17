@@ -120,7 +120,7 @@ static int cmd_x(char *args){
       data /= 16 ;
       a[1] = data%16;
       data /= 16;
-      printf("%X%X ",a[0],a[1]);
+      printf("%X%X ",a[1],a[0]);
     }
     printf("\n");
     addr += 4;
