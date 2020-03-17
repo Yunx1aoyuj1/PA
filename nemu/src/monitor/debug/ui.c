@@ -95,7 +95,6 @@ static int cmd_x(char *args){
 
   //address
   token = strtok(NULL ," ");
-  printf("%s",token);
   for (weight = 1,i = strlen(token) -1; i > 1; i --,weight *= 16){
     token[i] = toupper(token[i]);
     if(token[i] <='9' && token[i] >= '0'){
@@ -114,7 +113,7 @@ static int cmd_x(char *args){
   for(i = 0;i < times; i ++){
     data = vaddr_read(addr,4);    //如何调用，怎么传递参数，请阅读代码
     //每次循环将读取到的数据用 printf 打印出来
-    printf("0x%d 0x%8d ... %d\n",addr,data,data);//如果你不知道应该打印什么，可以参考参考输出形式
+    printf("0x%x 0x%8x ... %d\n",addr,data,data);//如果你不知道应该打印什么，可以参考参考输出形式
     addr += 4;
   }
   return 0;
