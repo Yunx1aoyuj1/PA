@@ -107,13 +107,13 @@ static int cmd_x(char *args){
     }  
   }
   
-  printf("Address\tDword block\t ... Byte sequence");
+  printf("Address\tDword block\t ... Byte sequence\n");
   //循环使用 vaddr_read 函数来读取内存
   uint32_t data;
   for(i = 0;i < times; i ++){
     data = vaddr_read(addr,4);    //如何调用，怎么传递参数，请阅读代码
     //每次循环将读取到的数据用 printf 打印出来
-    printf("0x%x 0x%8x ... %d\n",addr,data,data);//如果你不知道应该打印什么，可以参考参考输出形式
+    printf("0x%d 0x%8d ... %d\n",addr,data,data);//如果你不知道应该打印什么，可以参考参考输出形式
     addr += 4;
   }
   return 0;
