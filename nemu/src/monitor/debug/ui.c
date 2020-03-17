@@ -64,6 +64,27 @@ static int cmd_si(char *args){
   return 0;
 }
 
+static int cmd_info(char *args){
+  // 分割字符
+  char *token = strtok(args," ");
+  // 判断子命令是否是r
+  if (strcmp(token,"r") == 0)
+  {
+      // 依次打印所有寄存器
+      // using for 
+      // 这里给个例子：打印出 eax 寄存器的值
+      for(int i = 0; i < 8;i ++)
+      //i < 8,because : const char *regsl[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"};
+        printf("%s:\t%8x\t", regsl[i], cpu.gpr[i]._32);
+      
+  }
+  else if (strcmp(token,"w") == 0)
+  {
+      // 这里我们会在 PA1.3 中实现
+  }
+  return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -75,6 +96,7 @@ static struct {
 
   /* TODO: Add more commands */
   {"si","Single step. si x ,time x", cmd_si},
+  {"info","\t -r Print each register information \t -w ",cmd_info},
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
