@@ -94,7 +94,7 @@ static int cmd_x(char *args){
   }
 
   //address
-  token = strtok(args," ");
+  token = strtok(NULL ," ");
   printf("%s",token);
   for (weight = 1,i = strlen(token) -1; i > 1; i --,weight *= 16){
     token[i] = toupper(token[i]);
