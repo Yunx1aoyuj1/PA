@@ -4,6 +4,7 @@
 #include "nemu.h"
 
 #include <stdlib.h>
+#include <string.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
@@ -38,6 +39,24 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
+
+static int cmd_si(char *args){
+    // TODO: 利用 strtok 读取出 N
+    char *token = strtok(args," ");
+    int step;
+    if(token == NULL)
+    {
+      step = 1;
+    }
+    else
+    {
+      
+    }
+    // TODO: 然后根据 N 来执行对应的 cpu_exec(N) 操作
+    cpu_exec(step);
+    return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -48,7 +67,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
 
   /* TODO: Add more commands */
-
+  {"si","Single step. si x ,time x", cmd_si},
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
