@@ -14,8 +14,16 @@ enum { R_AL, R_CL, R_DL, R_BL, R_AH, R_CH, R_DH, R_BH };
  * For more details about the register encoding scheme, see i386 manual.
  */
 
+
+/* TODO：重新组织“ CPU_state”结构以匹配寄存器
+ * i386指令格式的编码方案。 例如，如果我们
+ *访问cpu.gpr[3]._16，我们将获得“ bx”； 如果我们访问
+ * cpu.gpr[1]._ 8[1]，我们将获得“ ch”寄存器。提示：使用“Union”。
+ *有关寄存器编码方案的更多详细信息，请参见i386手册。
+ */
+
 typedef struct {
-  struct {
+  union{
     uint32_t _32;
     uint16_t _16;
     uint8_t _8[2];
@@ -26,10 +34,18 @@ typedef struct {
   /* In NEMU, rtlreg_t is exactly uint32_t. This makes RTL instructions
    * in PA2 able to directly access these registers.
    */
-  rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
+  /*请勿更改GPR定义的顺序。 */
 
-  vaddr_t eip;
+  /* 
+    在NEMU中，rtlreg_t恰好是uint32_t。 这使得RTL指令
+    在PA2中能够直接访问这些寄存器。
+  */
+  struct
+  {
+    rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
 
+    vaddr_t eip;
+  };
 } CPU_state;
 
 extern CPU_state cpu;
