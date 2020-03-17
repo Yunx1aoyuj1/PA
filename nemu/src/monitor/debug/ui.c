@@ -41,20 +41,27 @@ static int cmd_help(char *args);
 
 
 static int cmd_si(char *args){
-    // TODO: 利用 strtok 读取出 N
-    char *token = strtok(args," ");
-    int step;
-    if(token == NULL)
+  // TODO: 利用 strtok 读取出 N
+  char *token = strtok(args," ");
+  int step = 0;//initialize
+  if(token == NULL)
+  {
+    step = 1;
+  }
+  else
+  {
+  int number,weight,length;//length of token
+    length = strlen(token);
+    int i;
+    for (weight = 1,i = 0; i < length ; weight *= 10, i ++)//change string into integer
     {
-      step = 1;
+      number = token[i] - '0';
+      step += number * weight;
     }
-    else
-    {
-      
-    }
-    // TODO: 然后根据 N 来执行对应的 cpu_exec(N) 操作
-    cpu_exec(step);
-    return 0;
+  }
+  // TODO: 然后根据 N 来执行对应的 cpu_exec(N) 操作
+  cpu_exec(step);
+  return 0;
 }
 
 static struct {
