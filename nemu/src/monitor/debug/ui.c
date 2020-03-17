@@ -75,7 +75,7 @@ static int cmd_info(char *args){
       // 这里给个例子：打印出 eax 寄存器的值
       for(int i = 0; i < 8;i ++)
       //i < 8,because : const char *regsl[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"};
-        printf("%s:\t%8x\t", regsl[i], cpu.gpr[i]._32);
+        printf("%s:\t%8x\t \n", regsl[i], cpu.gpr[i]._32);
       
   }
   else if (strcmp(token,"w") == 0)
