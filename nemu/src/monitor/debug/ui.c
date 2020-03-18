@@ -88,6 +88,7 @@ static int cmd_x(char *args){
   int times = 0,weight = 1;
   int i,number;
   //times
+  printf("%s",token);
   for (weight = 1,i = 0; i < strlen(token) ; weight *= 10, i ++){//change string into integer
       number = token[i] - '0';
       times += number * weight;
