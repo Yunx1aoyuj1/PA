@@ -47,6 +47,10 @@ static int cmd_si(char *args){
   if(token == NULL){
     step = 1;
   }
+  else if(strcmp(token,"-1"))
+  {
+    cmd_c(NULL);
+  }
   else{
   int number,weight,length;//length of token
     length = strlen(token);
