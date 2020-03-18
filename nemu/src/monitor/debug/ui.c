@@ -92,6 +92,7 @@ static int cmd_x(char *args){
       number = token[i] - '0';
       times += number * weight;
   }
+  printf("%d",weight);
   printf("%d\n",times);
   //address
   token = strtok(NULL ," ");
