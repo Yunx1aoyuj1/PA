@@ -47,7 +47,7 @@ static int cmd_si(char *args){
   if(token == NULL){
     step = 1;
   }
-  else if(strcmp(token,"-1"))
+  else if(strcmp(token,"-1") == 0)
   {
     cmd_c(NULL);
   }
