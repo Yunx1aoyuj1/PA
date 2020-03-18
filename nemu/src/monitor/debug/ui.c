@@ -91,9 +91,8 @@ static int cmd_x(char *args){
   for (weight = 1,i = 0; i < strlen(token) ; weight *= 10, i ++){//change string into integer
       number = token[i] - '0';
       times += number * weight;
+      printf("%d\n", number * weight);
   }
-  printf("%d",weight);
-  printf("%d\n",times);
   //address
   token = strtok(NULL ," ");
   for (weight = 1,i = strlen(token) -1; i > 1; i --,weight *= 16){
