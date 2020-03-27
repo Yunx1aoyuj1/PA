@@ -54,9 +54,8 @@ static int cmd_si(char *args){
   else{
   int number,weight,length;//length of token
     length = strlen(token);
-    printf("length:%d\n",length);
     int i;
-    for (weight = 1,i = 0; i < length ; weight *= 10, i ++){//change string into integer
+    for (weight = 1,i = length  - 1; i > 0 ; weight *= 10, i --){//change string into integer
       number = token[i] - '0';
       step += number * weight;
     }
