@@ -55,7 +55,7 @@ static int cmd_si(char *args){
   int number,weight,length;//length of token
     length = strlen(token);
     int i;
-    for (weight = 1,i = length  - 1; i > 0 ; weight *= 10, i --){//change string into integer
+    for (weight = 1,i = length - 1 ; i >= 0 ; weight *= 10, i --){//change string into integer
       number = token[i] - '0';
       step += number * weight;
     }
