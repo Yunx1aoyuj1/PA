@@ -107,7 +107,7 @@ static bool make_token(char *e) {
          */
         // calloc space for token
         if(rules[i].token_type == 256) continue;//空格不记录
-        
+        printf("\n%d\n",i);
         //else a new token 
         switch (rules[i].token_type) {
           case '+':{
