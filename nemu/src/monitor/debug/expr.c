@@ -138,10 +138,10 @@ uint32_t find_dominated_op(int p, int q){
 
 uint32_t eval(int p,int q) {
     int k = check_parentheses(p, q);
-    for (int i = 0; i < 32; i++)
+    /*for (int i = 0; i < 32; i++)
     {
       printf("%d,%s\n",tokens[i].type,tokens[i].str);
-    }
+    }*/
     
     if(k == 0)
     {
@@ -228,61 +228,51 @@ static bool make_token(char *e) {
         //else a new token 
         switch (rules[i].token_type) {
           case '+':{
-            nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
             state = 1;
           }break;
 
           case '-':{
-            nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
             state = 1;
           }break;
 
           case '*':{
-            nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
             state = 1;
           }break;
 
           case '/':{
-            nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
             state = 1;
           }break;
 
           case TK_EQ:{
-            nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
             state = 1;
           }break;
 
           case TK_10:{
-            nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
             state = 1;
           }break;
 
           case TK_16:{
-            nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
             state = 1;
           }break;
 
           case '(':{
-            nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
             state = 1;
           }break;
 
           case ')':{
-            nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
             state = 1;
           }break;
 
           case TK_REGISTER:{
-            nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
             state = 1;
           }break;
@@ -303,6 +293,7 @@ static bool make_token(char *e) {
           free(tokens[nr_token].str);
           tokens[nr_token].str = point;
           strcpy(tokens[nr_token].str,substr_start);
+          nr_token ++;
         }
         break;
       }
