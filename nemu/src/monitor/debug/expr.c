@@ -106,7 +106,7 @@ static bool make_token(char *e) {
          * of tokens, some extra actions should be performed.
          */
         // calloc space for token
-        if(rules[i].token_type == 256) break;//空格不记录
+        if(rules[i].token_type == 256) continue;//空格不记录
         
         //else a new token 
         switch (rules[i].token_type) {
