@@ -8,7 +8,7 @@
 
 enum {
   TK_NOTYPE = 256, TK_EQ = 255,TK_10 = 10,TK_16 = 16 ,
-  TK_SPACE = 254,TK_REGISTER = 253,
+  TK_REGISTER = 254,
 
   /* TODO: Add more token types */
 
@@ -42,7 +42,6 @@ static struct rule {
   {"[0-9]+",TK_10},             //十进制数字
   {"0x[0-9a-fA-F]+",TK_16},   //十六进制数字
   
-  {"\\s+",TK_SPACE},    //空格串
 
   {"\\(",'('},          //左括号
   {"\\)",')'},          //右括号 
@@ -80,6 +79,7 @@ typedef struct token {
 } Token;
 
 Token tokens[32];
+
 int nr_token;
 
 static bool make_token(char *e) {
@@ -104,10 +104,72 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-        printf("12 .%d\n",position);
         switch (rules[i].token_type) {
+          case 256: break;//空格不记录
 
-          //default: TODO();
+          case '+':{
+            nr_token ++;
+            tokens[nr_token].type = rules[i].token_type;
+            strcpy(tokens[nr_token].str,substr_start);
+          }break;
+
+          case '-':{
+            nr_token ++;
+            tokens[nr_token].type = rules[i].token_type;
+            strcpy(tokens[nr_token].str,substr_start);
+          }break;
+
+          case '*':{
+            nr_token ++;
+            tokens[nr_token].type = rules[i].token_type;
+            strcpy(tokens[nr_token].str,substr_start);
+          }break;
+
+          case '/':{
+            nr_token ++;
+            tokens[nr_token].type = rules[i].token_type;
+            strcpy(tokens[nr_token].str,substr_start);
+          }break;
+
+          case TK_EQ:{
+            nr_token ++;
+            tokens[nr_token].type = rules[i].token_type;
+            strcpy(tokens[nr_token].str,substr_start);
+          }break;
+
+          case TK_10:{
+            nr_token ++;
+            tokens[nr_token].type = rules[i].token_type;
+            strcpy(tokens[nr_token].str,substr_start);
+          }break;
+
+          case TK_16:{
+            nr_token ++;
+            tokens[nr_token].type = rules[i].token_type;
+            strcpy(tokens[nr_token].str,substr_start);
+          }break;
+
+          case '(':{
+            nr_token ++;
+            tokens[nr_token].type = rules[i].token_type;
+            strcpy(tokens[nr_token].str,substr_start);
+          }break;
+
+          case ')':{
+            nr_token ++;
+            tokens[nr_token].type = rules[i].token_type;
+            strcpy(tokens[nr_token].str,substr_start);
+          }break;
+
+          case TK_REGISTER:{
+            nr_token ++;
+            tokens[nr_token].type = rules[i].token_type;
+            strcpy(tokens[nr_token].str,substr_start);
+          }break;
+
+
+
+          default: return false;
         }
 
         break;
