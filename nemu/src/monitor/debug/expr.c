@@ -114,6 +114,7 @@ uint32_t find_dominated_op(int p, int q){
       number_of_bracket ++;
     else if( tokens[i].type == ')')
       number_of_bracket --;
+
     else if (number_of_bracket == 0){
       if(tokens[i].type == '+' || tokens[i].type == '-' || tokens[i].type == '*'  || tokens[i].type == 'c' ){
         if (tokens[i].type == '+' || tokens[i].type == '-' ){
@@ -126,7 +127,7 @@ uint32_t find_dominated_op(int p, int q){
           
         }
         else{
-          if (tokens[op].type == '*' || tokens[op].type == '/'){//only * or / be here 
+          if(tokens[op].type != '+' || tokens[op].type != '-' ){//only * or / be here 
             op = i;
           }
         }
@@ -188,7 +189,6 @@ uint32_t eval(int p,int q) {
     else {
       //int success;
       int op = find_dominated_op( p, q);
-      printf("%d %d \n",p,q);
       uint32_t val1 = eval(p, op - 1);
       uint32_t val2 = eval(op + 1, q);
       
