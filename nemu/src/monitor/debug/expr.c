@@ -174,6 +174,7 @@ static bool make_token(char *e) {
 
           default: return false;
         }
+        printf("\n!:64\n");
         if(state){
         // now it is a new and right token
           char *point = calloc(1,sizeof(substr_start));
