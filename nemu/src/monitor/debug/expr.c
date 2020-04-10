@@ -45,9 +45,8 @@ static struct rule {
   {"\\|\\|", '|'},         //||
   {"!", '!'},         //!
 
-
-  {"[0-9]+",TK_10},             //十进制数字
   {"0x[0-9a-fA-F]+",TK_16},   //十六进制数字
+  {"[0-9]+",TK_10},             //十进制数字
   
 
   {"\\(",'('},          //左括号
@@ -217,9 +216,17 @@ uint32_t eval(int p,int q) {
     else {
       //int success;
       int op = find_dominated_op( p, q);
-      if (op == p &&tokens[op].type == '-' && q - p == 1){
-        return -eval(q,q);
+      //single operation
+      if (op == p &&tokens[op].type == '-'){
+        return -eval(op + 1,q);
       }
+      if (op == p &&tokens[op].type == '*'){
+        return vaddr_read(eval(q,q),4);
+      }
+      if (op == p &&tokens[op].type == '!'){
+        return !eval(op + 1,q);
+      }
+
       uint32_t val1 = eval(p, op - 1);
       uint32_t val2 = eval(op + 1, q);
       switch (tokens[op].type) {
@@ -231,7 +238,6 @@ uint32_t eval(int p,int q) {
           case '&': return val1 && val2; break;
           case TK_EQ: return val1 == val2; break;
           case TK_UNEQ: return val1 != val2; break;
-          case TK_QUOTE:return vaddr_read(eval(q,q),4);break;
           default:assert(0);
       }
     }
