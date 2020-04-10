@@ -139,7 +139,6 @@ uint32_t eval(int p,int q) {
     {
       printf("%d,%s\n",tokens[i].type,tokens[i].str);
     }*/
-    printf("%d %d %d \n",k,p,q);
 
     if(k == 0)
     {
@@ -173,7 +172,6 @@ uint32_t eval(int p,int q) {
         }
         return sum;
     }
-
     else if ( k == true) {
         /* The expression is surrounded by a matched pair of parentheses.
         * If that is the case, just throw away the parentheses.
@@ -183,6 +181,7 @@ uint32_t eval(int p,int q) {
     else {
       //int success;
       int op = find_dominated_op( p, q);
+      printf("%d \n",op);
       uint32_t val1 = eval(p, op - 1);
       uint32_t val2 = eval(op + 1, q);
       switch (tokens[op].type) {
