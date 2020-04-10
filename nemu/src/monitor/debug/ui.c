@@ -142,7 +142,7 @@ static int cmd_p(char *args){
   strcpy(point,args);
   char *token = strtok(args," ");
   bool success = true;
-  printf("%s",point);
+  token = point;
   int result = expr(token,&success);
   if(success == false)
   {
