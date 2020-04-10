@@ -135,6 +135,7 @@ static int cmd_p(char *args){
   //分割字符串
   char *token = strtok(args," ");
   bool success = true;
+  printf("token");
   int result = expr(token,&success);
   if(success == false)
   {
@@ -160,7 +161,7 @@ static struct {
   {"si","Single step. si x ,time x", cmd_si},
   {"info","\t -r Print each register information \t -w ",cmd_info},//not finish 
   {"x","\t {times} {address}  Scan memory",cmd_x},
-  {"p","\t {expression}",cmd_p},
+  {"p","\t #{expression}",cmd_p},
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
