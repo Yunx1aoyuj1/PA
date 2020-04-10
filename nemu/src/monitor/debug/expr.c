@@ -188,7 +188,10 @@ uint32_t eval(int p,int q) {
     else {
       //int success;
       int op = find_dominated_op( p, q);
-      printf("%d,%d,%d \n",op,p,q);
+      if (op == p &&tokens[op].type == '-' && q - p == 1)
+      {
+        return -eval(q,q);
+      }
       uint32_t val1 = eval(p, op - 1);
       uint32_t val2 = eval(op + 1, q);
       switch (tokens[op].type) {
@@ -196,7 +199,7 @@ uint32_t eval(int p,int q) {
           case '-': return val1 - val2; break;
           case '*': return val1 * val2; break;
           case '/': return val1 / val2; break;
-          default:printf("%d %d %d \n",op,val1,val2);assert(0);
+          default:assert(0);
       }
     }
 }
