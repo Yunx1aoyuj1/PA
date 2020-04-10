@@ -5,6 +5,7 @@
  */
 #include <sys/types.h>
 #include <regex.h>
+#include <stdlib.h>
 
 enum {
   TK_NOTYPE = 256, TK_EQ = 255,TK_10 = 10,TK_16 = 16 ,
@@ -75,7 +76,7 @@ void init_regex() {
 
 typedef struct token {
   int type;
-  char *str;
+  char *str;//using char point
 } Token;
 
 Token tokens[32];
@@ -104,74 +105,75 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
+        // calloc space for token
+        if(rules[i].token_type == 256) break;//空格不记录
+        
+        //else a new token 
         switch (rules[i].token_type) {
-          case 256: break;//空格不记录
-
           case '+':{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
-            strcpy(tokens[nr_token].str,substr_start);
           }break;
 
           case '-':{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
-            strcpy(tokens[nr_token].str,substr_start);
           }break;
 
           case '*':{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
-            strcpy(tokens[nr_token].str,substr_start);
           }break;
 
           case '/':{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
-            strcpy(tokens[nr_token].str,substr_start);
           }break;
 
           case TK_EQ:{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
-            strcpy(tokens[nr_token].str,substr_start);
           }break;
 
           case TK_10:{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
-            strcpy(tokens[nr_token].str,substr_start);
           }break;
 
           case TK_16:{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
-            strcpy(tokens[nr_token].str,substr_start);
           }break;
 
           case '(':{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
-            strcpy(tokens[nr_token].str,substr_start);
           }break;
 
           case ')':{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
-            strcpy(tokens[nr_token].str,substr_start);
           }break;
 
           case TK_REGISTER:{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
-            strcpy(tokens[nr_token].str,substr_start);
           }break;
 
 
 
           default: return false;
         }
-
+        // now it is a new and right token
+        char *point = calloc(1,sizeof(substr_start));
+        if(point == 0)
+        {
+          printf("\nerror!\n");
+          exit(0);
+        } 
+        free(tokens[nr_token].str);
+        tokens[nr_token].str = point;
+        strcpy(tokens[nr_token].str,substr_start);
         break;
       }
     }
