@@ -98,6 +98,10 @@ int check_parentheses(int p, int q){
       number_of_bracket ++;
     else if( tokens[i].type == ')')
       number_of_bracket --;
+    if (number_of_bracket == 0 && i != q){
+        if_surrounded = false;
+    }
+      
   }
   if(number_of_bracket) return 0;//false //an wrong expression
   else if(!number_of_bracket && if_surrounded ) return 1;//true
