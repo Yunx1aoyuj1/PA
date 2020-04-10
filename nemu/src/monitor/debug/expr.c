@@ -184,12 +184,13 @@ uint32_t eval(int p,int q) {
       int op = find_dominated_op( p, q);
       uint32_t val1 = eval(p, op - 1);
       uint32_t val2 = eval(op + 1, q);
+      
       switch (tokens[op].type) {
           case '+': return val1 + val2; break;
           case '-': return val1 - val2; break;
           case '*': return val1 * val2; break;
           case '/': return val1 / val2; break;
-          default: assert(0);
+          default: printf("\n%d\n",tokens[op].type);assert(0);
       }
     }
 }
