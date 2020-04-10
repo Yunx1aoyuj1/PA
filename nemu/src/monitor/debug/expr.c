@@ -91,7 +91,7 @@ static bool make_token(char *e) {
     /* Try all rules one by one. */
     for (i = 0; i < NR_REGEX; i ++) {
       printf("%d ",regexec(&re[i], e + position, 1, &pmatch, 0) == 0 );
-      printf("%d\n",pmatch.rm_so == 0);
+      printf("%d\n",pmatch.rm_so);
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
@@ -104,10 +104,10 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-        printf("%d\n",position);
+        printf("12 .%d\n",position);
         switch (rules[i].token_type) {
 
-          default: TODO();
+          //default: TODO();
         }
 
         break;
