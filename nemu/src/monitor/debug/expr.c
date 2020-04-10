@@ -232,7 +232,7 @@ uint32_t eval(int p,int q) {
       if (op == p &&tokens[op].type == '-'){
         return -eval(op + 1,q);
       }
-      if (op == p &&tokens[op].type == '*'){
+      if (op == p &&tokens[op].type == TK_QUOTE){
         return vaddr_read(eval(q,q),4);
       }
       if (op == p &&tokens[op].type == '!'){
