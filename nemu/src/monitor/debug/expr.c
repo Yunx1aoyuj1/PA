@@ -106,7 +106,7 @@ int check_parentheses(int p, int q){
 }//different return value tell eval what happen when check false.
 
 uint32_t find_dominated_op(int p, int q){
-  uint32_t op = 0;
+  uint32_t op = p;
   //当+ （-）号位于两个(,*,/,)之间时，一定是中心操作符。其次如果-前没有操作数一定是负号
   int number_of_bracket = 0;
   for (int i = p ; i <= q; i++){
@@ -189,7 +189,6 @@ uint32_t eval(int p,int q) {
       int op = find_dominated_op( p, q);
       uint32_t val1 = eval(p, op - 1);
       uint32_t val2 = eval(op + 1, q);
-      
       switch (tokens[op].type) {
           case '+': return val1 + val2; break;
           case '-': return val1 - val2; break;
