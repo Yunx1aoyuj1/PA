@@ -213,9 +213,6 @@ uint32_t eval(int p,int q) {
       if (op == p &&tokens[op].type == '-' && q - p == 1){
         return -eval(q,q);
       }
-      else if (tokens[op].type == TK_QUOTE && q - p == 1){
-        return vaddr_read(eval(q,q),4);
-      }
       uint32_t val1 = eval(p, op - 1);
       uint32_t val2 = eval(op + 1, q);
       switch (tokens[op].type) {
@@ -223,6 +220,11 @@ uint32_t eval(int p,int q) {
           case '-': return val1 - val2; break;
           case '*': return val1 * val2; break;
           case '/': return val1 / val2; break;
+          case '|': return val1 || val2; break;
+          case '&': return val1 && val2; break;
+          case TK_EQ: return val1 == val2; break;
+          case TK_UNEQ: return val1 != val2; break;
+          case TK_QUOTE:return vaddr_read(eval(q,q),4);break;
           default:assert(0);
       }
     }
