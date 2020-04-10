@@ -106,6 +106,7 @@ static bool make_token(char *e) {
          * of tokens, some extra actions should be performed.
          */
         // calloc space for token
+        bool state = false;
         if(rules[i].token_type == 256) continue;//空格不记录
         printf("\n%d\n",i);
         //else a new token 
@@ -113,67 +114,79 @@ static bool make_token(char *e) {
           case '+':{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
+            state = 1;
           }break;
 
           case '-':{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
+            state = 1;
           }break;
 
           case '*':{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
+            state = 1;
           }break;
 
           case '/':{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
+            state = 1;
           }break;
 
           case TK_EQ:{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
+            state = 1;
           }break;
 
           case TK_10:{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
+            state = 1;
           }break;
 
           case TK_16:{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
+            state = 1;
           }break;
 
           case '(':{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
+            state = 1;
           }break;
 
           case ')':{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
+            state = 1;
           }break;
 
           case TK_REGISTER:{
             nr_token ++;
             tokens[nr_token].type = rules[i].token_type;
+            state = 1;
           }break;
 
 
 
           default: return false;
         }
+        if(state){
         // now it is a new and right token
-        char *point = calloc(1,sizeof(substr_start));
-        if(point == 0)
-        {
-          printf("\nerror!\n");
-          exit(0);
-        } 
-        free(tokens[nr_token].str);
-        tokens[nr_token].str = point;
-        strcpy(tokens[nr_token].str,substr_start);
+          char *point = calloc(1,sizeof(substr_start));
+          if(point == 0)
+          {
+            printf("\nerror!\n");
+            exit(0);
+          } 
+          free(tokens[nr_token].str);
+          tokens[nr_token].str = point;
+          strcpy(tokens[nr_token].str,substr_start);
+        }
         break;
       }
     }
