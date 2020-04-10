@@ -10,7 +10,7 @@
 
 enum {
   TK_NOTYPE = 256, TK_EQ = 255,TK_10 = 10,TK_16 = 16 ,
-  TK_REGISTER = 254,
+  TK_REGISTER = 254,TK_UNEQ = 253,TK_QUOTE = 252,
 
   /* TODO: Add more token types */
 
@@ -40,6 +40,11 @@ static struct rule {
   {"\\/", '/'},         //除号
   
   {"==", TK_EQ},        // equal
+  {"!=", TK_UNEQ},        // unequal
+  {"&&", '&'},         //&&
+  {"\\|\\|", '|'},         //||
+  {"!", '!'},         //!
+
 
   {"[0-9]+",TK_10},             //十进制数字
   {"0x[0-9a-fA-F]+",TK_16},   //十六进制数字
@@ -49,6 +54,23 @@ static struct rule {
   {"\\)",')'},          //右括号 
 
   {"\\$[a-ehilpx]{2,3}", TK_REGISTER},//寄存器
+  
+  /*
+  <expr> ::= <decimal-number>
+  | <hexadecimal-number>    # 以"0x"开头
+  | <reg_name>              # 以"$"开头
+  | "(" <expr> ")"
+  | <expr> "+" <expr>
+  | <expr> "-" <expr>
+  | <expr> "*" <expr>
+  | <expr> "/" <expr>
+  | <expr> "==" <expr>
+  | <expr> "!=" <expr>
+  | <expr> "&&" <expr>
+  | <expr> "||" <expr>
+  | "!" <expr>
+  | "*" <expr>              # 指针解引用
+  */
 
 };
 
@@ -188,9 +210,11 @@ uint32_t eval(int p,int q) {
     else {
       //int success;
       int op = find_dominated_op( p, q);
-      if (op == p &&tokens[op].type == '-' && q - p == 1)
-      {
+      if (op == p &&tokens[op].type == '-' && q - p == 1){
         return -eval(q,q);
+      }
+      else if (tokens[op].type == TK_QUOTE && q - p == 1){
+        return vaddr_read(eval(q,q),4);
       }
       uint32_t val1 = eval(p, op - 1);
       uint32_t val2 = eval(op + 1, q);
@@ -252,6 +276,26 @@ static bool make_token(char *e) {
           }break;
 
           case TK_EQ:{
+            tokens[nr_token].type = rules[i].token_type;
+            state = 1;
+          }break;
+          
+          case TK_UNEQ:{
+            tokens[nr_token].type = rules[i].token_type;
+            state = 1;
+          }break;
+
+          case '&':{
+            tokens[nr_token].type = rules[i].token_type;
+            state = 1;
+          }break;
+
+          case '!':{
+            tokens[nr_token].type = rules[i].token_type;
+            state = 1;
+          }break;
+
+          case '|':{
             tokens[nr_token].type = rules[i].token_type;
             state = 1;
           }break;
@@ -322,11 +366,12 @@ uint32_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
 
-  /*for (int i = 0; i < nr_token; i ++) {
-    if (tokens[i].type == '*' && (i == 0 || tokens[i - 1].type == certain type) ) {
-        tokens[i].type = DEREF;
+    for (int i = 0; i < nr_token; i ++) {
+    if (tokens[i].type == '*' && (i == 0 || ((tokens[i - 1].type != TK_16 &&tokens[i - 1].type != TK_10) ))){
+        tokens[i].type =TK_QUOTE;
     }
-  }*/
+    //指针解引用
+  }
   return eval(0,nr_token - 1);
 }
 
