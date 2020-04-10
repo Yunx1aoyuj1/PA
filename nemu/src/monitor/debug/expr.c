@@ -32,7 +32,7 @@ static struct rule {
     空格串（一个或多个空格）。
     你应该把这些规则添加到规则数组中。
   */
-  {" +", TK_NOTYPE},    // spaces
+  {"\\s+", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
   {"\\-", '-'},         //减号
   {"\\*", '*'},         //乘号
@@ -105,7 +105,7 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-        // calloc space for token
+
         bool state = false;
         if(rules[i].token_type == TK_NOTYPE) continue;//空格不记录
         //else a new token 
@@ -174,10 +174,10 @@ static bool make_token(char *e) {
 
           default: return false;
         }
-        printf("\n!:64\n");
+
         if(state){
         // now it is a new and right token
-          char *point = calloc(1,sizeof(substr_start));
+          char *point = calloc(1,sizeof(substr_start));        // calloc space for token
           if(point == 0)
           {
             printf("\nerror!\n");
