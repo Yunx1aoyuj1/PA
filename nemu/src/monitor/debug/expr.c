@@ -142,7 +142,8 @@ uint32_t eval(int p,int q) {
     {
       printf("%d,%s\n",tokens[i].type,tokens[i].str);
     }*/
-    
+    printf("%d\n",k);
+
     if(k == 0)
     {
       printf("have wrong with number of brackets\n");
@@ -323,7 +324,6 @@ uint32_t expr(char *e, bool *success) {
         tokens[i].type = DEREF;
     }
   }*/
-  printf("%d\n",nr_token - 1);
   return eval(0,nr_token - 1);
 }
 
