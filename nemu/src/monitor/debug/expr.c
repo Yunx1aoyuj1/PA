@@ -7,7 +7,8 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ = 255,TK_10 = 254,TK_16 = 253 ,TK_SPACE = 252,TK_REGISTER = 251,
+  TK_NOTYPE = 256, TK_EQ = 255,TK_10 = 10,TK_16 = 16 ,
+  TK_SPACE = 254,TK_REGISTER = 253,
 
   /* TODO: Add more token types */
 
@@ -38,7 +39,7 @@ static struct rule {
   
   {"==", TK_EQ},        // equal
 
-  {"\\d+",TK_10},             //十进制数字
+  {"[0-9]+",TK_10},             //十进制数字
   {"0x[0-9a-fA-F]+",TK_16},   //十六进制数字
   
   {"\\s+",TK_SPACE},    //空格串
@@ -53,6 +54,7 @@ static struct rule {
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
 
 static regex_t re[NR_REGEX];
+
 
 /* Rules are used for many times.
  * Therefore we compile them only once before any usage.
