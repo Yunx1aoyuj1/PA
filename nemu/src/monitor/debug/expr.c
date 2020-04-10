@@ -120,6 +120,9 @@ uint32_t find_dominated_op(int p, int q){
         if (tokens[i].type == '+' || tokens[i].type == '-' ){
           if(tokens[i].type == '-' &&(i == p || (tokens[i - 1].type == TK_10 || tokens[i - 1].type == TK_16))){//judge if a negative number//is a negative number pass.
             op = i;
+          }else if(tokens[i].type == '+' )
+          {
+            op = i;
           }
         }
         else{
