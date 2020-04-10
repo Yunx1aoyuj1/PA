@@ -109,7 +109,7 @@ uint32_t find_dominated_op(int p, int q){
   uint32_t op = p;
   //当+ （-）号位于两个(,*,/,)之间时，一定是中心操作符。其次如果-前没有操作数一定是负号
   int number_of_bracket = 0;
-  for (int i = p ; i <= q; i++){
+  for (int i = p ; i < q; i++){
     if(tokens[i].type == '(' )
       number_of_bracket ++;
     else if( tokens[i].type == ')')
@@ -194,7 +194,7 @@ uint32_t eval(int p,int q) {
           case '-': return val1 - val2; break;
           case '*': return val1 * val2; break;
           case '/': return val1 / val2; break;
-          default:printf("%d %d %d \n",op,p,q);assert(0);
+          default:printf("%d %d %d \n",op,val1,val2);assert(0);
       }
     }
 }
