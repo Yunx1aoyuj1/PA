@@ -135,13 +135,14 @@ static int cmd_p(char *args){
   //分割字符串
   char *token = strtok(args," ");
   bool success = true;
+  int result = expr(token,&success);
   if(success == false)
   {
     printf("expression illegal\n");
   }
   else
   {
-    printf("%s:%d\n",token,expr(token,&success));
+    printf("%s:%d\n",token,result);
   }
   return 0;
 }
