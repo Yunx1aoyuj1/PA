@@ -162,9 +162,9 @@ uint32_t eval(int p,int q) {
         */
         //transfor string to int 
         int length = strlen(tokens[p].str);
-        int weight = tokens[p].type;
+        int weight = 1;
         int sum = 0;
-        for (int i = length -1; i >= 0; i-- ,weight *=weight)
+        for (int i = length -1; i >= 0; i-- ,weight *=tokens[p].type)
         {
           if(tokens[p].str[i] >= '0' && tokens[p].str[i] <='9')
             sum +=  (tokens[p].str[i] - '0') * weight;
@@ -175,7 +175,7 @@ uint32_t eval(int p,int q) {
           else if(tokens[p].str[i] >= 'A' && tokens[p].str[i] <='F')
             sum +=  (tokens[p].str[i] - 'A' + 10 )  * weight;
         }
-        printf("sum : %d",sum);
+        printf("sum : %d\n",sum);
         return sum;
     }
 
