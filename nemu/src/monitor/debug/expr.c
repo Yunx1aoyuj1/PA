@@ -57,6 +57,7 @@ static regex_t re[NR_REGEX];
 /* Rules are used for many times.
  * Therefore we compile them only once before any usage.
  */
+
 void init_regex() {
   int i;
   char error_msg[128];
@@ -89,7 +90,8 @@ static bool make_token(char *e) {
   while (e[position] != '\0') {
     /* Try all rules one by one. */
     for (i = 0; i < NR_REGEX; i ++) {
-      printf("%d\n",regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0);
+      printf("%d ",regexec(&re[i], e + position, 1, &pmatch, 0) == 0 );
+      printf("%d\n",pmatch.rm_so == 0);
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
