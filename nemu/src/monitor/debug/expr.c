@@ -285,7 +285,7 @@ static bool make_token(char *e) {
 
         if(state){
         // now it is a new and right token
-          char *point = (char *)calloc(strlen(substr_start),sizeof(char));        // calloc space for token
+          char *point = (char *)calloc(substr_len,sizeof(char));        // calloc space for token
           if(point == 0)
           {
             printf("\nerror!\n");
@@ -293,7 +293,7 @@ static bool make_token(char *e) {
           } 
           free(tokens[nr_token].str);
           tokens[nr_token].str = point;
-          strcpy(tokens[nr_token].str,substr_start);
+          strncpy(tokens[nr_token].str,substr_start,substr_len);
           nr_token ++;
         }
         break;
