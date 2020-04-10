@@ -141,13 +141,14 @@ static int cmd_p(char *args){
   } 
   strcpy(point,args);
   char *token = strtok(args," ");*/
-  char *token = (char *)calloc(strlen(args),sizeof(char)); ;
+  /*char *token = (char *)calloc(strlen(args),sizeof(char)); ;
   if(token == 0)
   {
     printf("\nerror!\n");
     exit(0);
   }
-  strcpy(token,args);
+  strcpy(token,args);*/
+  char *token = strtok(args,"p");
   bool success = true;
   int result = expr(token,&success);
   if(success == false)
