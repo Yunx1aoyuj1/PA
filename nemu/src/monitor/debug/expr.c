@@ -7,6 +7,7 @@
 #include <regex.h>
 #include <stdlib.h>
 
+
 enum {
   TK_NOTYPE = 256, TK_EQ = 255,TK_10 = 10,TK_16 = 16 ,
   TK_REGISTER = 254,
@@ -82,6 +83,118 @@ typedef struct token {
 Token tokens[32];
 
 int nr_token;
+
+int check_parentheses(int p, int q){
+  bool if_surrounded = 0;
+  if(tokens[p].type == '(' && tokens[q].type == ')')
+    if_surrounded = 1;
+  int number_of_bracket = 0 ,i = p;
+  /*
+    "(" weights 1;
+    ")" weights -1;
+  */
+  for ( ; i <= q; i++){
+    if(tokens[i].type == '(' )
+      number_of_bracket ++;
+    else if( tokens[i].type == ')')
+      number_of_bracket --;
+  }
+  if(number_of_bracket) return 0;//false //an wrong expression
+  else if(!number_of_bracket && if_surrounded ) return 1;//true
+  else if(!number_of_bracket && !if_surrounded ) return -1;
+  return 1;//make it could be compile
+}//different return value tell eval what happen when check false.
+
+uint32_t find_dominated_op(int p, int q){
+  uint32_t op = 0;
+  //当+ （-）号位于两个(,*,/,)之间时，一定是中心操作符。其次如果-前没有操作数一定是负号
+  int number_of_bracket = 0;
+  for (int i = p ; i <= q; i++){
+    if(tokens[i].type == '(' )
+      number_of_bracket ++;
+    else if( tokens[i].type == ')')
+      number_of_bracket --;
+    else if (number_of_bracket == 0){
+      if(tokens[i].type == '+' || tokens[i].type == '-' || tokens[i].type == '*'  || tokens[i].type == 'c' ){
+        if (tokens[i].type == '+' || tokens[i].type == '-' ){
+          if(tokens[i].type == '-' &&(i == p || (tokens[i - 1].type != TK_10 || tokens[i - 1].type != TK_16))){//judge if a negative number
+              continue;//is a negative number pass.
+          }
+          else{
+            op = i;
+          }
+          
+        }
+        else{
+          if (tokens[op].type == '*' || tokens[op].type == '/'){//only * or / be here 
+            op = i;
+          }
+        }
+      }
+    }
+  }
+  return op;
+}
+
+uint32_t eval(int p,int q) {
+    int k = check_parentheses(p, q);
+    if(k == 0)
+    {
+      printf("have wrong with number of brackets\n");
+      assert(0);
+    }
+
+    if (p > q) {
+        printf("Bad expression");
+        assert(0);
+    }
+
+    else if (p == q) {
+        /* Single token.
+        * For now this token should be a number.
+        * Return the value of the number.
+        */
+        //transfor string to int 
+        int length = strlen(tokens[p].str);
+        int weight = tokens[p].type;
+        int sum = 0;
+        for (int i = length -1; i >= 0; i-- ,weight *=weight)
+        {
+          if(tokens[p].str[i] >= '0' && tokens[p].str[i] <='9')
+            sum +=  (tokens[p].str[i] - '0') * weight;
+
+          else if(tokens[p].str[i] >= 'a' && tokens[p].str[i] <='f')
+            sum +=  (tokens[p].str[i] - 'a' + 10) * weight;
+
+          else if(tokens[p].str[i] >= 'A' && tokens[p].str[i] <='F')
+            sum +=  (tokens[p].str[i] - 'A' + 10 )  * weight;
+        }
+        
+        return sum;
+    }
+
+    else if ( k == true) {
+        /* The expression is surrounded by a matched pair of parentheses.
+        * If that is the case, just throw away the parentheses.
+        */
+        return eval(p + 1, q - 1);
+    }
+
+    else {
+      //int success;
+      int op = find_dominated_op( p, q);
+      uint32_t val1 = eval(p, op - 1);
+      uint32_t val2 = eval(op + 1, q);
+      switch (tokens[op].type) {
+          case '+': return val1 + val2; break;
+          case '-': return val1 - val2; break;
+          case '*': return val1 * val2; break;
+          case '/': return val1 / val2; break;
+          default: assert(0);
+      }
+    }
+}
+
 
 static bool make_token(char *e) {
   int position = 0;
@@ -180,7 +293,7 @@ static bool make_token(char *e) {
           if(point == 0)
           {
             printf("\nerror!\n");
-            exit(0);
+            assert(0);
           } 
           free(tokens[nr_token].str);
           tokens[nr_token].str = point;
@@ -205,8 +318,17 @@ uint32_t expr(char *e, bool *success) {
     return 0;
   }
 
+
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
 
+  /*for (int i = 0; i < nr_token; i ++) {
+    if (tokens[i].type == '*' && (i == 0 || tokens[i - 1].type == certain type) ) {
+        tokens[i].type = DEREF;
+    }
+  }*/
+
+  return eval(0,nr_token);
   return 0;
 }
+
