@@ -143,7 +143,7 @@ uint32_t eval(int p,int q) {
     {
       printf("%d,%s\n",tokens[i].type,tokens[i].str);
     }*/
-    //printf("%d %d %d \n",k,p,q);
+    printf("%d %d %d \n",k,p,q);
 
     if(k != 0)
     {
