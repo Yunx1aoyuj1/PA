@@ -138,6 +138,11 @@ uint32_t find_dominated_op(int p, int q){
 
 uint32_t eval(int p,int q) {
     int k = check_parentheses(p, q);
+    for (int i = 0; i < 32; i++)
+    {
+      printf("%d,%s\n",tokens[i].type,tokens[i].str);
+    }
+    
     if(k == 0)
     {
       printf("have wrong with number of brackets\n");
@@ -190,7 +195,7 @@ uint32_t eval(int p,int q) {
           case '-': return val1 - val2; break;
           case '*': return val1 * val2; break;
           case '/': return val1 / val2; break;
-          default: printf("\n%d\t%d\t%s\n",op,tokens[op].type,tokens[0].str);assert(0);
+          default:assert(0);
       }
     }
 }
