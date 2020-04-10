@@ -135,7 +135,7 @@ static int cmd_p(char *args){
   //分割字符串
   char *token = strtok(args," ");
   bool success = true;
-  printf("token");
+  printf("%s",token);
   int result = expr(token,&success);
   if(success == false)
   {
