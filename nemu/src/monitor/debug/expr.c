@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ
+  TK_NOTYPE = 256, TK_EQ = 255,TK_10 = 254,TK_16 = 253 ,TK_SPACE = 252,TK_REGISTER = 251,
 
   /* TODO: Add more token types */
 
@@ -21,10 +21,33 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-
+  /*
+    你需要编写上面的定义中所涉及的最简单的规则，即：
+    十进制数字、十六进制数字，如 0x1234，567；
+    现阶段所定义的 9 个寄存器，如 $eax, $ebx；
+    左括号、右括号；
+    加号、减号、乘号、除号；
+    空格串（一个或多个空格）。
+    你应该把这些规则添加到规则数组中。
+  */
   {" +", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
-  {"==", TK_EQ}         // equal
+  {"\\-", '-'},         //减号
+  {"\\*", '*'},         //乘号
+  {"\\/", '/'},         //除号
+  
+  {"==", TK_EQ},        // equal
+
+  {"\\d+",TK_10},             //十进制数字
+  {"0x[0-9a-fA-F]+",TK_16},   //十六进制数字
+  
+  {"\\s+",TK_SPACE},    //空格串
+
+  {"\\(",'('},          //左括号
+  {"\\)",')'},          //右括号 
+
+  {"\\$[a-ehilpx]{2,3}", TK_REGISTER},//寄存器
+
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
