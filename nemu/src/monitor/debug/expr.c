@@ -323,7 +323,7 @@ uint32_t expr(char *e, bool *success) {
         tokens[i].type = DEREF;
     }
   }*/
-  printf("1\n");
+  printf("%d\n",nr_token - 1);
   return eval(0,nr_token - 1);
 }
 
