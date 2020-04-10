@@ -194,7 +194,7 @@ uint32_t eval(int p,int q) {
           case '-': return val1 - val2; break;
           case '*': return val1 * val2; break;
           case '/': return val1 / val2; break;
-          default:printf("%d %d %d \n",k,p,q);assert(0);
+          default:printf("%d %d %d \n",op,p,q);assert(0);
       }
     }
 }
