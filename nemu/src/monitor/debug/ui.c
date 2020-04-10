@@ -133,16 +133,22 @@ static int cmd_x(char *args){
 
 static int cmd_p(char *args){
   //分割字符串
-  char *point = (char *)calloc(strlen(args),sizeof(char));        // calloc space for token
+  /*char *point = (char *)calloc(strlen(args),sizeof(char));        // calloc space for token
   if(point == 0)
   {
     printf("\nerror!\n");
     exit(0);
   } 
   strcpy(point,args);
-  char *token = strtok(args," ");
+  char *token = strtok(args," ");*/
+  char *token = (char *)calloc(strlen(args),sizeof(char)); ;
+  if(token == 0)
+  {
+    printf("\nerror!\n");
+    exit(0);
+  }
+  strcpy(token,args);
   bool success = true;
-  token = point;
   int result = expr(token,&success);
   if(success == false)
   {
