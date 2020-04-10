@@ -176,7 +176,7 @@ static bool make_token(char *e) {
 
         if(state){
         // now it is a new and right token
-          char *point = calloc(1,sizeof(substr_start));        // calloc space for token
+          char *point = (char *)calloc(1,sizeof(substr_start));        // calloc space for token
           if(point == 0)
           {
             printf("\nerror!\n");
