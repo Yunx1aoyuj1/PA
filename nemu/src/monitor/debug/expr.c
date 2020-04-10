@@ -145,7 +145,7 @@ uint32_t eval(int p,int q) {
     }*/
     //printf("%d %d %d \n",k,p,q);
 
-    if(k == 0)
+    if(k != 0)
     {
       printf("have wrong with number of brackets\n");
       assert(0);
