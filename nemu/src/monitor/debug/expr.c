@@ -32,7 +32,7 @@ static struct rule {
     空格串（一个或多个空格）。
     你应该把这些规则添加到规则数组中。
   */
-  {"\\s+", TK_NOTYPE},    // spaces
+  {" +", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
   {"\\-", '-'},         //减号
   {"\\*", '*'},         //乘号
@@ -100,7 +100,7 @@ static bool make_token(char *e) {
         Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
         position += substr_len;
-
+        printf("%s", substr_start);
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
