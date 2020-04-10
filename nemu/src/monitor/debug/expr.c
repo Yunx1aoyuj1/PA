@@ -145,7 +145,8 @@ uint32_t eval(int p,int q) {
     }
 
     if (p > q) {
-        printf("Bad expression");
+        printf("%d,%d\n",p,q);
+        printf("Bad expression\n");
         assert(0);
     }
 
