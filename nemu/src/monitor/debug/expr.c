@@ -175,7 +175,6 @@ uint32_t eval(int p,int q) {
           else if(tokens[p].str[i] >= 'A' && tokens[p].str[i] <='F')
             sum +=  (tokens[p].str[i] - 'A' + 10 )  * weight;
         }
-        printf("%s , sum : %d\n",tokens[p].str,sum);
         return sum;
     }
 
