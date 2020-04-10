@@ -75,7 +75,7 @@ void init_regex() {
 
 typedef struct token {
   int type;
-  char str[32];
+  char *str;
 } Token;
 
 Token tokens[32];
@@ -192,7 +192,7 @@ uint32_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
+  //TODO();
 
   return 0;
 }
