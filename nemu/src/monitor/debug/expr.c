@@ -1,11 +1,11 @@
 #include "nemu.h"
-
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
  */
 #include <sys/types.h>
 #include <regex.h>
 #include <stdlib.h>
+#include<string.h>
 
 
 enum {
@@ -191,6 +191,7 @@ uint32_t eval(int p,int q) {
         * Return the value of the number.
         */
         //transfor string to int 
+      if(tokens[p].type != TK_REGISTER){
         int length = strlen(tokens[p].str);
         int weight = 1;
         int sum = 0;
@@ -206,6 +207,17 @@ uint32_t eval(int p,int q) {
             sum +=  (tokens[p].str[i] - 'A' + 10 )  * weight;
         }
         return sum;
+      }
+      else{
+        //i < 8,because : const char *regsl[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"};
+        int i = 0;
+        char *reg = strtok(tokens[p].str,"$");
+        for( ; i < 8 ; i++){
+          if(strcmp(reg,regsl[i]) == 0)
+            break;
+        }
+        return cpu.gpr[i]._32;
+      }
     }
     else if ( k == true) {
         /* The expression is surrounded by a matched pair of parentheses.
