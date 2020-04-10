@@ -132,22 +132,7 @@ static int cmd_x(char *args){
 }
 
 static int cmd_p(char *args){
-  //分割字符串
-  /*char *point = (char *)calloc(strlen(args),sizeof(char));        // calloc space for token
-  if(point == 0)
-  {
-    printf("\nerror!\n");
-    exit(0);
-  } 
-  strcpy(point,args);
-  char *token = strtok(args," ");*/
-  /*char *token = (char *)calloc(strlen(args),sizeof(char)); ;
-  if(token == 0)
-  {
-    printf("\nerror!\n");
-    exit(0);
-  }
-  strcpy(token,args);*/
+  //分割字符串 we need all without "p"
   char *token = strtok(args,"p");
   bool success = true;
   int result = expr(token,&success);
@@ -157,7 +142,7 @@ static int cmd_p(char *args){
   }
   else
   {
-    printf("%s:%d\n",token,result);
+    printf("%#x\n",result);
   }
   return 0;
 }
