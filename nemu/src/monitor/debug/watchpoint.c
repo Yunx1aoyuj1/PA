@@ -40,7 +40,7 @@ WP* new_wp(){// changed head and free_
   else{
     WP* p = free_;
     WP* q = NULL;
-
+    free_ = free_ -> next;
     q = head;
     head = p;
     head ->next = q;
