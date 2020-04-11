@@ -88,7 +88,7 @@ static int cmd_info(char *args){
 
 static int cmd_x(char *args){
   //分割字符串，得到起始位置和要读取的次数
-  
+
   char *token = strtok(args," ");
   uint32_t addr = 0;
   int times = 0,weight = 1;
@@ -99,7 +99,8 @@ static int cmd_x(char *args){
       times += (number * weight);
   }
   //address
-  token = strtok(NULL ," ");
+  token = strtok(NULL ,"");
+  /*
   for (weight = 1,i = strlen(token) -1; i > 1; i --,weight *= 16){
     token[i] = toupper(token[i]);
     if(token[i] <='9' && token[i] >= '0'){
@@ -110,7 +111,9 @@ static int cmd_x(char *args){
       number = token[i] - 'A';
       addr += number * weight;
     }  
-  }
+  }*/
+  bool success;
+  addr = expr(token,&success);
   
   printf("Address\tDword block\t ... Byte sequence\n");
   //循环使用 vaddr_read 函数来读取内存
