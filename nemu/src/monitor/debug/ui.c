@@ -81,7 +81,7 @@ static int cmd_info(char *args){
   }
   else if (strcmp(token,"w") == 0){
       // 这里我们会在 PA1.3 中实现
-    
+    list_watchpoint();
   }
   return 0;
 }

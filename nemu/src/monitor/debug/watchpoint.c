@@ -40,11 +40,19 @@ WP* new_wp(){// changed head and free_
   else{
     WP* p = free_;
     WP* q = NULL;
-
-    free_ = free_ -> next;
-    q = head;
-    head = p;
-    head ->next = q;
+    if(head == NULL){
+      free_ = free_ -> next;
+      q = head;
+      head = p;
+      head ->next = NULL;
+    }
+    else{
+      free_ = free_ -> next;
+      q = head;
+      for (;q -> next; q = q ->next);
+      q -> next = p;
+      p -> next = NULL;
+    }
     return p;
   }
 }
@@ -96,7 +104,7 @@ int set_watchpoint(char *e){    //给予一个表达式e，构造以该表达式
     return (-1);
   }
 
-  printf("set watchpoint #%d \nexpr = %s\nold value =  0x%x\n",wp -> NO,e,wp -> old_val);
+  printf("set watchpoint #%d \nexpr = %s\nold value =  0x%08x\n",wp -> NO,e,wp -> old_val);
   return (wp -> NO);
 }
 
@@ -109,7 +117,15 @@ bool delete_watchpoint(int NO){ //给予一个监视点编号，从已使用的�
 }
 
 void list_watchpoint(void){     //显示当前在使用状态中的监视点列表
-
+  WP *wp = head;
+  if(!head){
+    printf("No watchpoint!\n");
+    return ;
+  }
+  printf("NO Expr\t\tOld Value");
+  for ( ; wp;  wp = wp -> next){
+    printf("%d %s\t\t0x%08X",wp -> NO,wp -> expr ,wp -> old_val);
+  }
 }
 
 WP* scan_watchpoint(void){      //扫描所有使用中的监视点，返回触发的监视点指针，若无触发返回NULL
