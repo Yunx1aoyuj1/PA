@@ -122,9 +122,9 @@ void list_watchpoint(void){     //显示当前在使用状态中的监视点列�
     printf("No watchpoint!\n");
     return ;
   }
-  printf("NO Expr\t\tOld Value");
+  printf("NO Expr\t\tOld Value\n");
   for ( ; wp;  wp = wp -> next){
-    printf("%d %s\t\t0x%08X",wp -> NO,wp -> expr ,wp -> old_val);
+    printf("%d %s\t\t0x%08X \n",wp -> NO,wp -> expr ,wp -> old_val);
   }
 }
 
