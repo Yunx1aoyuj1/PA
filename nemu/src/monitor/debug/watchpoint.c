@@ -60,15 +60,19 @@ void free_wp(WP *wp){
     printf("free_wp get an empty WP point \n");
     return ;
   }
-  WP *p,*q;
+  WP *p,*q,*r;
   p =head;
-  for (; p ->next != wp && p; p = p -> next);
+  for (; (p ->next )-> NO!= wp -> NO && p; p = p -> next);
   if(p){
-    p -> next = wp -> next;
+    r = p -> next ;
+    p -> next = r -> next;
+    
+    q = free_;
+    free_ = r;
+    free_ -> next =q;
+
     q = head;
-    head = wp;
-    head -> next =q;
-    q = head;
+    (p -> NO) --;
     for (; q != p; q = q -> next)
       (q -> NO) --;   
   }

@@ -165,11 +165,30 @@ static int cmd_w(char *args){
   }
   strcpy(wp -> expr , token);
   wp -> old_val = cpu.gpr[i]._32;
-  printf("set watchpoint #%d \nexpr = %s\nold value =  0x%x",wp -> NO,token,wp -> old_val);
+  printf("set watchpoint #%d \nexpr = %s\nold value =  0x%x\n",wp -> NO,token,wp -> old_val);
   return (0);
 }
 
 static int cmd_d(char *args){
+  char *token = strtok(args," ");
+  int length = strlen(token);
+  int weight = 1;
+  int sum = 0;
+  for (int i = length -1; i >= 0; i-- ,weight *=10){
+    if(token[i] >= '0' && token[i]<='9')
+      sum +=  (token[i] - '0') * weight;
+
+    else if(token[i] >= 'a' && token[i] <='f')
+      sum +=  (token[i] - 'a' + 10) * weight;
+
+    else if(token[i] >= 'A' && token[i] <='F')
+      sum +=  (token[i] - 'A' + 10 )  * weight;
+  }
+  //transform into int
+  WP wp;
+  wp . NO =sum;
+  printf("Watchpoint %d delete",sum);
+  free_wp(&wp);
   return (0);
 }
 
