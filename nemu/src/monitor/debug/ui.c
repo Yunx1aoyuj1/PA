@@ -88,6 +88,7 @@ static int cmd_info(char *args){
 
 static int cmd_x(char *args){
   //分割字符串，得到起始位置和要读取的次数
+  
   char *token = strtok(args," ");
   uint32_t addr = 0;
   int times = 0,weight = 1;

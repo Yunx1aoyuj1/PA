@@ -128,6 +128,39 @@ void list_watchpoint(void){     //显示当前在使用状态中的监视点列�
   }
 }
 
+
+/*
+  每当 cpu_exec() 执行完一条指令，
+  就对所有待监视的表达式进行求值（你之前已经实现表达式求值的功能了），
+  比较它们的值有没有发生变化（即新值和旧值做比较），若发生了变化，程序就因触发了监视点而暂停下来，
+  你需要将 nemu_state 变量设置为 NEMU_STOP 来达到暂停的效果，
+  并用变化后的值覆盖旧值（即作为新的旧值）
+*/
 WP* scan_watchpoint(void){      //扫描所有使用中的监视点，返回触发的监视点指针，若无触发返回NULL
-  return NULL;
+  WP *wp = head;
+  WP *ret;
+  int number = 0;
+  if(!head){
+    printf("No watchpoint!\n");
+    return NULL;
+  }
+
+  bool success = true;
+
+  for ( ; wp;  wp = wp -> next){
+    wp -> new_val = expr(wp ->expr,&success);
+    if(!success)
+      printf("Error!fail to eval NO%d expression",wp -> NO);
+    else if(wp -> new_val != wp -> old_val){
+      printf("\nwatchpoint NO.%d`s old_val has changed\n",wp -> NO);
+      printf("\nold_val :%d\nnew_val:%d",wp -> old_val , wp -> new_val);
+      printf("program paused\n");
+      wp -> old_val = wp -> new_val;
+      ret = wp;
+    }
+  }
+  if(number)
+    return ret;
+  else
+    return NULL;
 }
