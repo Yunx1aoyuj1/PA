@@ -252,7 +252,7 @@ uint32_t eval(int p,int q) {
               return val1 / val2;
             else{
               printf("val2 is 0 when operation is \"/\"\n");
-              assert(0);
+              return 0;
             }break;
           }
           case '|': return val1 || val2; break;
