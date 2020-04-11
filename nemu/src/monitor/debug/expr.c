@@ -125,7 +125,7 @@ int check_parentheses(int p, int q){
     }
       
   }
-
+  printf("\n%d,%d,%d\n",number_of_bracket,p,q);
   if(number_of_bracket) return 0;//false //an wrong expression
   else if(!number_of_bracket && if_surrounded ) return 1;//true
   else if(!number_of_bracket && !if_surrounded ) return -1;
