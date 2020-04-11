@@ -147,10 +147,10 @@ uint32_t find_dominated_op(int p, int q){
     else if (number_of_bracket == 0){
       if(tokens[i].type == '+' || tokens[i].type == '-' || tokens[i].type == '*'  || tokens[i].type == 'c' ){
         if (tokens[i].type == '+' || tokens[i].type == '-' ){
-          if(tokens[i].type == '-' &&(i == p || (tokens[i - 1].type == TK_10 || tokens[i - 1].type == TK_16))){//judge if a negative number//is a negative number pass.
+          if(tokens[i].type == '-' && !(i == p || i == 0 || tokens[i - 1].type == '+' || tokens[i - 1].type == '-'|| tokens[i - 1].type == '*'|| tokens[i - 1].type == '/' )){//judge if a negative number//is a negative number pass.
             op = i;
-          }else if(tokens[i].type == '+' )
-          {
+          }
+          else if(tokens[i].type == '+' ){
             op = i;
           }
         }
@@ -391,7 +391,8 @@ uint32_t expr(char *e, bool *success) {
   //TODO();
 
     for (int i = 0; i < nr_token; i ++) {
-    if (tokens[i].type == '*' && (i == 0 || ((tokens[i - 1].type != TK_16 &&tokens[i - 1].type != TK_10) ))){
+    if (tokens[i].type == '*' && 
+        (i == 0 || tokens[i - 1].type == '+' || tokens[i - 1].type == '-'|| tokens[i - 1].type == '*'|| tokens[i - 1].type == '/' )){
         tokens[i].type =TK_QUOTE;
     }
     //指针解引用
