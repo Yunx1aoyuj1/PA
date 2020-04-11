@@ -40,11 +40,16 @@ WP* new_wp(){// changed head and free_
   else{
     WP* p = free_;
     WP* q = NULL;
+
     q = head;
     head = p;
     head ->next = q;
-    printf("%p",free_ -> next);
+    
+    printf("%p\n",free_ -> next);
+    
     free_ = free_ -> next;
+    printf("%p\n",free_ );
+    
     if(head -> next == 0){
       head -> NO =1;
     }
