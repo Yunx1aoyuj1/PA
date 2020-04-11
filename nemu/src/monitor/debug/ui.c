@@ -134,7 +134,7 @@ static int cmd_x(char *args){
 
 static int cmd_p(char *args){
   //分割字符串 we need all without "p"
-  char *token = strtok(args,"p");
+  char *token = strtok(args,"");
   bool success = true;
   int result = expr(token,&success);
   if(success == false)
@@ -150,14 +150,14 @@ static int cmd_p(char *args){
 
 static int cmd_w(char *args){
   
-  char *token = strtok(args," ");
+  char *token = strtok(args,"");
   //i < 8,because : const char *regsl[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"};
   set_watchpoint(token);
   return (0);
 }
 
 static int cmd_d(char *args){
-  char *token = strtok(args," ");
+  char *token = strtok(args,"");
   int length = strlen(token);
   int weight = 1;
   int sum = 0;
