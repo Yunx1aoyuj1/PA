@@ -142,10 +142,7 @@ uint32_t find_dominated_op(int p, int q){
       number_of_bracket ++;
     else if( tokens[i].type == ')')
       number_of_bracket --;
-    else if( 
-      tokens[i].type =='|'|| tokens[i].type == '&' ||
-      tokens[i].type == TK_EQ || tokens[i].type == TK_UNEQ
-      ){
+    else if(tokens[i].type =='|'|| tokens[i].type == '&' ||tokens[i].type == TK_EQ || tokens[i].type == TK_UNEQ){
         op = i;
         return op;
     }
@@ -159,10 +156,8 @@ uint32_t find_dominated_op(int p, int q){
             op = i;
           }
         }
-        else{
-          if(tokens[op].type != '+' && tokens[op].type != '-' ){//only * or / be here 
-            op = i;
-          }
+        else if(tokens[op].type != '+' && tokens[op].type != '-' ){//only * or / be here 
+          op = i;
         }
       }
     }
