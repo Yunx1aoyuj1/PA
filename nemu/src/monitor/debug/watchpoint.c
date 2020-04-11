@@ -3,8 +3,20 @@
 
 #define NR_WP 32
 
+/*typedef struct watchpoint {
+  int NO;
+  struct watchpoint *next;
+  char *expr;
+  uint32_t new_val;
+  uint32_t old_val;
+} WP;*/
+
 static WP wp_pool[NR_WP];
 static WP *head, *free_;
+/*
+  代码中定义了监视点结构的池 wp_pool，还有两个链表 head 和 free_，
+  其中 head 用于组织使用中的监视点结构，free_ 用于组织空闲的监视点结构。
+*/
 
 void init_wp_pool() {
   int i;
@@ -13,11 +25,38 @@ void init_wp_pool() {
     wp_pool[i].next = &wp_pool[i + 1];
   }
   wp_pool[NR_WP - 1].next = NULL;
-
   head = NULL;
   free_ = wp_pool;
 }
 
 /* TODO: Implement the functionality of watchpoint */
+/*  
+  其中 new_wp() 从 free_ 链表中返回一个空闲的监视点结构，
+  free_wp() 将 wp 归还到 free_ 链表中，
+  这两个函数会作为监视点池的接口被其它函数调用。
+  需要注意的是，调用 new_wp() 时可能会出现没有空闲监视点结构的情况，
+  为了简单起见，此时可以通过 assert(0) 马上终止程序。
+  框架代码中定义了 32 个监视点结构，一般情况下应该足够使用，
+  如果你需要更多的监视点结构，你可以修改 NR_WP 宏的值。
+*/
 
+/*WP* new_wp(){// changed head and free
+  if(!free_){
+    printf("no free watch point\n");
+    assert(0);
+  }
+  else{
+    WP* p = free_;
+    WP* q = NULL;
+    q = head;
+    head = p;
+    head ->next = q;
+    free_ = free_ -> next;
+    return p;
+  }
+}
+
+void free_wp(WP *wp){
+
+}*/
 

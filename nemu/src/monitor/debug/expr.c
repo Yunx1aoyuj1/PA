@@ -228,6 +228,7 @@ uint32_t eval(int p,int q) {
     else {
       //int success;
       int op = find_dominated_op( p, q);
+
       //single operation
       if (op == p &&tokens[op].type == '-'){
         return -eval(op + 1,q);
@@ -241,6 +242,7 @@ uint32_t eval(int p,int q) {
 
       uint32_t val1 = eval(p, op - 1);
       uint32_t val2 = eval(op + 1, q);
+      //double operation
       switch (tokens[op].type) {
           case '+': return val1 + val2; break;
           case '-': return val1 - val2; break;
