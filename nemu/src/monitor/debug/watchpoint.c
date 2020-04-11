@@ -43,6 +43,7 @@ WP* new_wp(){// changed head and free_
     q = head;
     head = p;
     head ->next = q;
+    printf("%p",free_ -> next);
     free_ = free_ -> next;
     if(head -> next == 0){
       head -> NO =1;
