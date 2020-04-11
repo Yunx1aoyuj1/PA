@@ -159,7 +159,6 @@ uint32_t find_dominated_op(int p, int q){
         }
       }
     }
-    printf("\n %d,%d,%d,%d,%d\n",number_of_bracket,op,p,q,i);
   }
   return op;
 }
