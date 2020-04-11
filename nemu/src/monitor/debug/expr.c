@@ -247,7 +247,14 @@ uint32_t eval(int p,int q) {
           case '+': return val1 + val2; break;
           case '-': return val1 - val2; break;
           case '*': return val1 * val2; break;
-          case '/': return val1 / val2; break;
+          case '/':{
+            if(val2 != 0)
+              return val1 / val2;
+            else{
+              printf("val2 is 0 when operation is \"/\"\n");
+              assert(0);
+            }break;
+          }
           case '|': return val1 || val2; break;
           case '&': return val1 && val2; break;
           case TK_EQ: return val1 == val2; break;
