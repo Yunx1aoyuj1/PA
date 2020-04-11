@@ -147,7 +147,7 @@ static int cmd_p(char *args){
   }
   else
   {
-    printf("\n%s = %d\n",token,result);
+    printf("%s = %d\n",token,result);
   }
   return 0;
 }
