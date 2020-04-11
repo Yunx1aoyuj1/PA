@@ -3,14 +3,6 @@
 
 #define NR_WP 32
 
-/*typedef struct watchpoint {
-  int NO;
-  struct watchpoint *next;
-  char *expr;
-  uint32_t new_val;
-  uint32_t old_val;
-} WP;*/
-
 static WP wp_pool[NR_WP];
 static WP *head, *free_;
 /*
@@ -40,10 +32,10 @@ void init_wp_pool() {
   如果你需要更多的监视点结构，你可以修改 NR_WP 宏的值。
 */
 
-/*WP* new_wp(){// changed head and free
+WP* new_wp(){// changed head and free_
   if(!free_){
     printf("no free watch point\n");
-    assert(0);
+    return (NULL);
   }
   else{
     WP* p = free_;
@@ -52,11 +44,36 @@ void init_wp_pool() {
     head = p;
     head ->next = q;
     free_ = free_ -> next;
+    if(head -> next == 0){
+      head -> NO =1;
+    }
+    else{
+      head -> NO = 1 + head -> next -> NO;
+    }
     return p;
   }
 }
 
 void free_wp(WP *wp){
-
-}*/
+  if(wp == 0)
+  {
+    printf("free_wp get an empty WP point \n");
+    return ;
+  }
+  WP *p,*q;
+  p =head;
+  for (; p ->next != wp && p; p = p -> next);
+  if(p){
+    p -> next = wp -> next;
+    q = head;
+    head = wp;
+    head -> next =q;
+    q = head;
+    for (; q != p; q = q -> next)
+      (q -> NO) --;   
+  }
+  else{
+    printf("this watch point is not using\n");
+  }
+}
 

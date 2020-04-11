@@ -147,6 +147,32 @@ static int cmd_p(char *args){
   return 0;
 }
 
+static int cmd_w(char *args){
+  // 分割字符
+  char *token = strtok(args," ");
+  //i < 8,because : const char *regsl[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"};
+  int i = 0;
+  char *reg = strtok(token,"$");
+  for( ; i < 8 ; i++){
+    if(strcmp(reg,regsl[i]) == 0)
+      break;
+  }
+  WP *wp;
+  wp = new_wp();
+  if(!wp){
+    printf("all watchpoints have been used\n");
+    return (1);
+  }
+  strcpy(wp -> expr , token);
+  wp -> old_val = cpu.gpr[i]._32;
+  printf("set watchpoint #%d \nexpr = %s\nold value =  0x%x",wp -> NO,token,wp -> old_val);
+  return (0);
+}
+
+static int cmd_d(char *args){
+  return (0);
+}
+
 static struct {
   char *name;
   char *description;
@@ -158,9 +184,11 @@ static struct {
 
   /* TODO: Add more commands */
   {"si","Single step. si x ,time x", cmd_si},
-  {"info","\t -r Print each register information \t -w ",cmd_info},//not finish 
+  {"info","\t -r Print each register information \t -w 命令来打印使用中的监视点信息",cmd_info},//not finish 
   {"x","\t {times} {address}  Scan memory",cmd_x},
   {"p","\t #{expression}",cmd_p},
+  {"w","\t {$name_of_reg} set a new watch point",cmd_w},
+  {"d","\t {NO} delete Number.NO watch point",cmd_d},
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))

@@ -98,7 +98,7 @@ void init_regex() {
 
 typedef struct token {
   int type;
-  char *str;//using char point
+  char str[32];//using char point
 } Token;
 
 Token tokens[32];
@@ -251,8 +251,8 @@ uint32_t eval(int p,int q) {
             if(val2 != 0)
               return val1 / val2;
             else{
-              printf("val2 is 0 when operation is \"/\"\n");
-              return 0;
+              printf("val2 is 0 when operation is \'/\'\n");
+              assert(0);
             }break;
           }
           case '|': return val1 || val2; break;
@@ -368,14 +368,6 @@ static bool make_token(char *e) {
 
         if(state){
         // now it is a new and right token
-          char *point = (char *)calloc(substr_len,sizeof(char));        // calloc space for token
-          if(point == 0)
-          {
-            printf("\nerror!\n");
-            assert(0);
-          } 
-          free(tokens[nr_token].str);
-          tokens[nr_token].str = point;
           strncpy(tokens[nr_token].str,substr_start,substr_len);
           nr_token ++;
         }
