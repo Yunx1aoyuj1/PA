@@ -81,6 +81,7 @@ static int cmd_info(char *args){
   }
   else if (strcmp(token,"w") == 0){
       // 这里我们会在 PA1.3 中实现
+    
   }
   return 0;
 }
@@ -148,24 +149,10 @@ static int cmd_p(char *args){
 }
 
 static int cmd_w(char *args){
-  // 分割字符
+  
   char *token = strtok(args," ");
   //i < 8,because : const char *regsl[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"};
-  int i = 0;
-  char *reg = strtok(token,"$");
-  for( ; i < 8 ; i++){
-    if(strcmp(reg,regsl[i]) == 0)
-      break;
-  }
-  WP *wp;
-  wp = new_wp();
-  if(!wp){
-    printf("all watchpoints have been used\n");
-    return (1);
-  }
-  strcpy(wp -> expr , token);
-  wp -> old_val = cpu.gpr[i]._32;
-  printf("set watchpoint #%d \nexpr = %s\nold value =  0x%x\n",wp -> NO,token,wp -> old_val);
+  set_watchpoint(token);
   return (0);
 }
 
@@ -185,10 +172,7 @@ static int cmd_d(char *args){
       sum +=  (token[i] - 'A' + 10 )  * weight;
   }
   //transform into int
-  WP wp;
-  wp . NO =sum;
-  printf("Watchpoint %d delete",sum);
-  free_wp(&wp);
+  delete_watchpoint(sum);
   return (0);
 }
 

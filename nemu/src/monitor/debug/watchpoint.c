@@ -34,7 +34,7 @@ void init_wp_pool() {
 
 WP* new_wp(){// changed head and free_
   if(!free_){
-    printf("no free watch point\n");
+    
     return (NULL);
   }
   else{
@@ -82,3 +82,36 @@ void free_wp(WP *wp){
   }
 }
 
+int set_watchpoint(char *e){    //给予一个表达式e，构造以该表达式为监视目标的监视点，并返回编号
+  WP *wp = new_wp();
+  if(wp == 0){
+    printf("no free watch point\n");
+    return 0;
+  }
+  strcpy(wp -> expr , e);
+  bool success =true;
+  wp -> old_val = expr(wp -> expr,&success);
+  if(success == 0){
+    printf("set_watchpoint error");
+    return (-1);
+  }
+
+  printf("set watchpoint #%d \nexpr = %s\nold value =  0x%x\n",wp -> NO,e,wp -> old_val);
+  return (wp -> NO);
+}
+
+bool delete_watchpoint(int NO){ //给予一个监视点编号，从已使用的监视点中归还该监视点到池中
+  printf("Watchpoint %d delete\n",NO);
+  WP wp ;
+  wp.NO = NO;
+  free_wp(&wp);
+  return true;
+}
+
+void list_watchpoint(void){     //显示当前在使用状态中的监视点列表
+
+}
+
+WP* scan_watchpoint(void){      //扫描所有使用中的监视点，返回触发的监视点指针，若无触发返回NULL
+  return NULL;
+}
