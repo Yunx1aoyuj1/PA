@@ -1,6 +1,5 @@
 #include "monitor/watchpoint.h"
 #include "monitor/expr.h"
-
 #define NR_WP 32
 
 static WP wp_pool[NR_WP];
@@ -97,13 +96,16 @@ int set_watchpoint(char *e){    //给予一个表达式e，构造以该表达式
     return 0;
   }
   strcpy(wp -> expr , e);
+  if(strncmp(wp -> expr , "$eip ==",7) == 0){//break;
+    printf("break %s set",wp ->expr);
+  }
+
   bool success =true;
   wp -> old_val = expr(wp -> expr,&success);
   if(success == 0){
     printf("set_watchpoint error");
     return (-1);
   }
-
   printf("set watchpoint #%d \nexpr = %s\nold value =  0x%08x\n",wp -> NO,e,wp -> old_val);
   return (wp -> NO);
 }
@@ -152,11 +154,20 @@ WP* scan_watchpoint(void){      //扫描所有使用中的监视点，返回触�
     if(!success)
       printf("Error!fail to eval NO%d expression",wp -> NO);
     else if(wp -> new_val != wp -> old_val){
-      printf("\nwatchpoint NO.%d`s old_val has changed\n",wp -> NO);
-      printf("\nold_val :%d\nnew_val:%d",wp -> old_val , wp -> new_val);
-      printf("program paused\n");
-      wp -> old_val = wp -> new_val;
-      ret = wp;
+      if(strncmp(wp -> expr , "$eip ==",7) == 0){//break;
+        printf("hint : break %s",wp -> expr);
+        return wp;
+      }
+      else{
+        bool success = 1;
+        printf("\nwatchpoint NO.%d`s old_val has changed @%08x\n",wp -> NO,expr("$eip",&success));
+        //tell where 
+        printf("expression = %s\n",wp -> expr);
+        printf("\nold_val :%d\nnew_val:%d",wp -> old_val , wp -> new_val);
+        printf("program paused\n");
+        wp -> old_val = wp -> new_val;
+        ret = wp;
+      }
     }
   }
   if(number)
