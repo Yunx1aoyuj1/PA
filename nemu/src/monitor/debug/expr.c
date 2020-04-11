@@ -134,8 +134,8 @@ uint32_t find_dominated_op(int p, int q){
   uint32_t op = p;
   //当+ （-）号位于两个(,*,/,)之间时，一定是中心操作符。其次如果-前没有操作数一定是负号
   int number_of_bracket = 0;
+  printf("%c",tokens[op].type);
   for (int i = p ; i <= q; i++){
-
     if(tokens[i].type == '(' )
       number_of_bracket ++;
     else if( tokens[i].type == ')')
