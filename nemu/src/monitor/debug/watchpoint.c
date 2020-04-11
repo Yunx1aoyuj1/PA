@@ -49,13 +49,6 @@ WP* new_wp(){// changed head and free_
     
     free_ = free_ -> next;
     printf("%p\n",free_ );
-    
-    if(head -> next == 0){
-      head -> NO =1;
-    }
-    else{
-      head -> NO = 1 + head -> next -> NO;
-    }
     return p;
   }
 }
@@ -79,8 +72,6 @@ void free_wp(WP *wp){
 
     q = head;
     (p -> NO) --;
-    for (; q != p; q = q -> next)
-      (q -> NO) --;   
   }
   else{
     printf("this watch point is not using\n");
