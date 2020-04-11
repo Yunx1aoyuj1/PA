@@ -45,9 +45,6 @@ WP* new_wp(){// changed head and free_
     q = head;
     head = p;
     head ->next = q;
-    
-    printf("%p\n",free_ -> next);
-    printf("%p\n",free_ );
     return p;
   }
 }
@@ -60,20 +57,28 @@ void free_wp(WP *wp){
   }
   WP *p,*q,*r;
   p =head;
-  for (; (p ->next )-> NO!= wp -> NO && p; p = p -> next);
-  if(p){
-    r = p -> next ;
-    p -> next = r -> next;
-    
+  if(p -> NO == wp -> NO){
+    head = p -> next;
     q = free_;
-    free_ = r;
-    free_ -> next =q;
-
-    q = head;
-    (p -> NO) --;
+    free_ = p;
+    free_ -> next = q;
   }
   else{
-    printf("this watch point is not using\n");
+    for (; (p ->next )-> NO!= wp -> NO && p; p = p -> next);
+    if(p){
+      r = p -> next ;
+      p -> next = r -> next;
+      
+      q = free_;
+      free_ = r;
+      free_ -> next =q;
+
+      q = head;
+      (p -> NO) --;
+    }
+    else{
+      printf("this watch point is not using\n");
+    }
   }
 }
 
