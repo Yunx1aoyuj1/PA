@@ -115,6 +115,7 @@ int check_parentheses(int p, int q){
     ")" weights -1;
   */
   for ( ; i <= q; i++){
+    printf("\n%d,%d,%d\n",number_of_bracket,p,q);
     if(tokens[i].type == '(' )
       number_of_bracket ++;
     else if( tokens[i].type == ')')
@@ -124,6 +125,7 @@ int check_parentheses(int p, int q){
     }
       
   }
+
   if(number_of_bracket) return 0;//false //an wrong expression
   else if(!number_of_bracket && if_surrounded ) return 1;//true
   else if(!number_of_bracket && !if_surrounded ) return -1;
