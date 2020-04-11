@@ -139,6 +139,7 @@ static int cmd_x(char *args){
 static int cmd_p(char *args){
   //分割字符串 we need all without "p"
   char *token = strtok(args,"");
+  printf("%s\n",token);
   bool success = true;
   int result = expr(token,&success);
   if(success == false)
