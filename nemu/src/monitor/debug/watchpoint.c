@@ -152,10 +152,10 @@ WP* scan_watchpoint(void){      //扫描所有使用中的监视点，返回触�
   for ( ; wp;  wp = wp -> next){
     wp -> new_val = expr(wp ->expr,&success);
     if(!success)
-      printf("Error!fail to eval NO%d expression",wp -> NO);
+      printf("Error!fail to eval NO%d expression\n",wp -> NO);
     else if(wp -> new_val != wp -> old_val){
       if(strncmp(wp -> expr , "$eip ==",7) == 0){//break;
-        printf("hint : break %s",wp -> expr);
+        printf("hint : break %s\n",wp -> expr);
         return wp;
       }
       else{
@@ -163,7 +163,7 @@ WP* scan_watchpoint(void){      //扫描所有使用中的监视点，返回触�
         printf("\nwatchpoint NO.%d`s old_val has changed @%08x\n",wp -> NO,expr("$eip",&success));
         //tell where 
         printf("expression = %s\n",wp -> expr);
-        printf("\nold_val :%d\nnew_val:%d",wp -> old_val , wp -> new_val);
+        printf("\nold_val :%d\nnew_val:%d\n",wp -> old_val , wp -> new_val);
         printf("program paused\n");
         wp -> old_val = wp -> new_val;
         ret = wp;
