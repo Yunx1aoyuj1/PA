@@ -163,7 +163,8 @@ void difftest_step(uint32_t eip) {
     printf("QUME.ebp:0x%x,NUME.edp:0x%x\n",r.ebp , cpu.ebp);
   }
 
+
   if (diff) {
-    nemu_state = NEMU_END;
+    //nemu_state = NEMU_END;
   }
 }
