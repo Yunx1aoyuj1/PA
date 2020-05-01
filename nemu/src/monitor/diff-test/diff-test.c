@@ -149,9 +149,9 @@ void difftest_step(uint32_t eip) {
 
   // TODO: Check the registers state with QEMU.
   // Set `diff` as `true` if they are not the same.
-  if(r.eax != cpu.eax || r.ecx != cpu.ecx || r.edx != cpu.edx || r.ebx != cpu.ebx || r.esi != cpu.esi ||
-     r.edi != cpu.edi || r.ebp != cpu.ebp || r.esp != cpu.esp){
-       diff = true;
+  if(r.eax != cpu.eax || r.ecx != cpu.ecx || r.edx != cpu.edx || r.ebx != cpu.ebx || r.esi != cpu.esi \
+    || r.edi != cpu.edi || r.ebp != cpu.ebp || r.esp != cpu.esp){
+    diff = true;
     printf("QUME.eax:0x%x,NUME.eax:0x%x\n",r.eax , cpu.eax);
     printf("QUME.ecx:0x%x,NUME.ecx:0x%x\n",r.ecx , cpu.ecx);
     printf("QUME.edx:0x%x,NUME.edx:0x%x\n",r.edx , cpu.edx);
