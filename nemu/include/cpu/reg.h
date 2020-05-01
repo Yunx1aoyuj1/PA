@@ -22,7 +22,7 @@ enum { R_AL, R_CL, R_DL, R_BL, R_AH, R_CH, R_DH, R_BH };
  *有关寄存器编码方案的更多详细信息，请参见i386手册。
  */
 
-typedef union {
+typedef struct {
   union{
     uint32_t _32;
     uint16_t _16;
