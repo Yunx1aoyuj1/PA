@@ -19,7 +19,7 @@ make_EHelper(xor) {
     rtl_sm(&(id_dest-> addr), id_dest -> width , &t0);
   }
   else if(id_dest -> type == OP_TYPE_REG){
-    rtl_sr(t0, id_dest -> width , &(id_dest-> addr));
+    rtl_sr(id_dest-> reg, id_dest -> width , &t0);
   }
 
   //cf -> t1 and of -> t2
