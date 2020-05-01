@@ -9,6 +9,7 @@ typedef struct {
 
 #define IDEXW(id, ex, w)   {concat(decode_, id), concat(exec_, ex), w}
 #define IDEX(id, ex)       IDEXW(id, ex, 0)
+
 #define EXW(ex, w)         {NULL, concat(exec_, ex), w}
 #define EX(ex)              EXW(ex, 0)
 #define EMPTY              EX(inv)
@@ -40,6 +41,9 @@ static make_EHelper(name) { \
 }
 
 /* 0x80, 0x81, 0x83 */
+/*make_group(gp1,
+    EX(add), EX(or), EX(adc), EX(sbb),
+    EX(and), EX(sub), EX(xor), EX(cmp))*/
 make_group(gp1,
     EMPTY, EMPTY, EMPTY, EMPTY,
     EMPTY, EMPTY, EMPTY, EMPTY)
@@ -93,7 +97,7 @@ opcode_entry opcode_table [512] = {
   /* 0x48 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x4c */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x50 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x54 */	EMPTY, IDEXW(r, push, 0), EMPTY, EMPTY,
+  /* 0x54 */	EMPTY, IDEXW(r, push,0), EMPTY, EMPTY,
   /* 0x58 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x5c */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x60 */	EMPTY, EMPTY, EMPTY, EMPTY,
@@ -130,7 +134,7 @@ opcode_entry opcode_table [512] = {
   /* 0xdc */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xe0 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xe4 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0xe8 */	IDEXW(I, call , 0), EMPTY, EMPTY, EMPTY,
+  /* 0xe8 */	IDEXW(I, call,0), EMPTY, EMPTY, EMPTY,
   /* 0xec */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xf0 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xf4 */	EMPTY, EMPTY, IDEXW(E, gp3, 1), IDEX(E, gp3),
