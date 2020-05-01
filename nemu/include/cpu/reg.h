@@ -46,6 +46,8 @@ typedef union {
     vaddr_t eip;
   };
   // this a linux 
+  
+  
   union{
     struct{
       uint32_t CF :1;
