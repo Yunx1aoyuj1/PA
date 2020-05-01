@@ -6,7 +6,7 @@ make_EHelper(mov) {
 }
 
 make_EHelper(push) {
-  //TODO();
+  TODO();
 
   print_asm_template1(push);
 }
