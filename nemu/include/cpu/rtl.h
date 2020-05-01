@@ -160,7 +160,7 @@ static inline void rtl_pop(rtlreg_t* dest) {
   //TODO();
   rtl_lr_l(&t0 ,R_ESP);//t0 = cpu.esp
   rtl_lm(dest , &t0 , 4);
-  rtl_addi(&t0 , &t0 , 4);
+  rtl_addi(&t0 , &t0 , 8);
   rtl_sr_l(R_ESP , &t0);
 }
 
