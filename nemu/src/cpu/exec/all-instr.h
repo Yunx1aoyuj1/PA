@@ -8,7 +8,6 @@ make_EHelper(inv);
 make_EHelper(nemu_trap);
 
 make_EHelper(call);
-//make_EHelper(ret);
 
 make_EHelper(push);
 make_EHelper(pop);
