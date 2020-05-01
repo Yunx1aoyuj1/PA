@@ -14,7 +14,7 @@ make_EHelper(and) {
 
 make_EHelper(xor) {
   //TODO();
-  rtl_xor(&t0 , &id_src2 -> val , &id_src ->val);
+  rtl_xor(&t0 , &id_dest-> val , &id_src ->val);
   
   if(id_dest -> type == OP_TYPE_MEM){
     rtl_sm(&(id_dest-> addr), id_dest -> width , &t0);
