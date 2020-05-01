@@ -121,7 +121,7 @@ bool delete_watchpoint(int NO){ //给予一个监视点编号，从已使用的�
 void list_watchpoint(void){     //显示当前在使用状态中的监视点列表
   WP *wp = head;
   if(!head){
-    printf("No watchpoint!\n");
+   //printf("No watchpoint!\n");
     return ;
   }
   printf("NO Expr\t\tOld Value\n");
@@ -143,7 +143,7 @@ WP* scan_watchpoint(void){      //扫描所有使用中的监视点，返回触�
   WP *ret;
   int number = 0;
   if(!head){
-    printf("No watchpoint!\n");
+    //printf("No watchpoint!\n");
     return NULL;
   }
 
