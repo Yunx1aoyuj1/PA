@@ -100,7 +100,7 @@ inline word cpu_irq_interrupt_address()   { return memory_readw(0xFFFE); }
 
 // Stack Routines
 
-void cpu_stack_pushb(byte data) { memory_writeb(0x100 + cpu.SP--, data);       }
+void cpu_stack_b(byte data) { memory_writeb(0x100 + cpu.SP--, data);       }
 void cpu_stack_pushw(word data) { memory_writew(0xFF + cpu.SP, data); cpu.SP -= 2; }
 byte cpu_stack_popb()           { return memory_readb(0x100 + ++cpu.SP);       }
 word cpu_stack_popw()           { cpu.SP += 2; return memory_readw(0xFF + cpu.SP); }
