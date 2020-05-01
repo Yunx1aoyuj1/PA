@@ -160,7 +160,7 @@ static inline void rtl_pop(rtlreg_t* dest) {
   //TODO();
   rtl_lr_l(&t0 , cpu.esp);
   rtl_lm(dest , &t0 , 4);
-  rtl_addi(&cpu.esp , &t0 , 4);
+  rtl_addi(&cpu.esp , &cpu.esp , 4);
 }
 
 static inline void rtl_eq0(rtlreg_t* dest, const rtlreg_t* src1) {
@@ -183,9 +183,9 @@ static inline void rtl_neq0(rtlreg_t* dest, const rtlreg_t* src1) {
 
 static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- src1[width * 8 - 1]
-  TODO();
-  //t0 = (*src1 >> ((width - 1) *8 )) &0xff;
-  //*dest = t0;
+  //TODO();
+  t0 = (*src1 >> ((width - 1) *8 )) &0xff;
+  *dest = t0;
 }
 
 static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
