@@ -160,12 +160,12 @@ void difftest_step(uint32_t eip) {
     printf("QUME.esi:0x%x,NUME.esi:0x%x\n",r.esi , cpu.esi);
     printf("QUME.edi:0x%x,NUME.edi:0x%x\n",r.edi , cpu.edi);
     printf("QUME.esp:0x%x,NUME.esp:0x%x\n",r.esp , cpu.esp);
-    printf("QUME.ebp:0x%x,NUME.edp:0x%x\n",r.ebp , cpu.ebp);
+    printf("QUME.ebp:0x%x,NUME.ebp:0x%x\n",r.ebp , cpu.ebp);
     printf("QUME.eip:0x%x,NUME.eip:0x%x\n",r.eip , cpu.eip);
   }
 
 
   if (diff) {
-    nemu_state = NEMU_END;
+   // nemu_state = NEMU_END;
   }
 }
