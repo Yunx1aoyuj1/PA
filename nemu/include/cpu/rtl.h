@@ -184,29 +184,30 @@ static inline void rtl_neq0(rtlreg_t* dest, const rtlreg_t* src1) {
 static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- src1[width * 8 - 1]
   //TODO();
-  *dest = *src1;
+  t0 = (*src1 >> ((width - 1) *8 )) &0xf;
+  *dest = t0;
 }
 
 static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   // eflags.ZF <- is_zero(result[width * 8 - 1 .. 0])
   //
-  uint32_t state = 0;
   if (*result == 0){
-    state = 1;
+    t0 = 1;
   }
-  rtl_get_ZF(&state);
+  else{
+    t0 = 0;
+  }
+  rtl_get_ZF(&t0);
 }
 
 static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   // eflags.SF <- is_sign(result[width * 8 - 1 .. 0])
-  uint32_t sign ;
-  sign = ((*result) >> (width * 8)) & 0x1;
-  rtl_set_SF(&sign);
+  t0 = ((*result) >> (width * 8)) & 0x1;
+  rtl_set_SF(&t0);
 }
 
 static inline void rtl_update_ZFSF(const rtlreg_t* result, int width) {
   rtl_update_ZF(result, width);
   rtl_update_SF(result, width);
 }
-
 #endif
