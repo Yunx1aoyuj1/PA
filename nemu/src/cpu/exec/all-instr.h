@@ -32,4 +32,4 @@ make_EHelper(test);
 make_EHelper(jcc);
 make_EHelper(inc);
 make_EHelper(dec);
-make_EHelper(jnp);
+make_EHelper(jmp);
