@@ -51,8 +51,7 @@ make_group(gp2,
     //EX(rol), EX(ror), EX(rcl), EX(rcr),
     //EX(shl), EX(shr), EMPTY  , EX(sar)
     EMPTY, EMPTY, EMPTY, EMPTY,
-    EMPTY, EMPTY, EMPTY, EX(sar)
-    )
+    EX(shl), EX(shr), EMPTY  , EX(sar))
 
   /* 0xf6, 0xf7 */
 make_group(gp3,
