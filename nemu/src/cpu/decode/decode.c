@@ -48,7 +48,8 @@ static inline make_DopHelper(SI) {
     rtl_sext(&t1,&t0,2);
   }
   else if(op -> width == 4){
-    t1 =   instr_fetch(eip,op -> width);
+    t0 =   instr_fetch(eip,op -> width);
+    rtl_sext(&t1,&t0,4);
   }
   op -> simm = t1 ; 
   rtl_li(&op->val, op->simm);

@@ -18,9 +18,9 @@ make_EHelper(and) {
   }
 
   //cf -> t1 and of -> t2
-  t1 = t2 = 0;
+  t1 = 0;
   rtl_set_CF(&t1);
-  rtl_set_OF(&t2);
+  rtl_set_OF(&t1);
   rtl_update_ZFSF(&id_dest -> val , id_dest -> width);
 
   print_asm_template2(and);
@@ -29,14 +29,7 @@ make_EHelper(and) {
 make_EHelper(xor) {
   //TODO();
   rtl_xor(&t0 , &id_dest-> val , &id_src ->val);
-  
-  if(id_dest -> type == OP_TYPE_MEM){
-    rtl_sm(&(id_dest-> addr), id_dest -> width , &t0);
-  }
-  else if(id_dest -> type == OP_TYPE_REG){
-    rtl_sr(id_dest-> reg, id_dest -> width , &t0);
-  }
-
+  operand_write(id_dest,&t0);
   //cf -> t1 and of -> t2
   t1 = t2 = 0;
   rtl_set_CF(&t1);
