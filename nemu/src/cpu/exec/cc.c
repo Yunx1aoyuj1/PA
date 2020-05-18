@@ -1,5 +1,5 @@
 #include "cpu/rtl.h"
-#include<stdio.h>
+//#include<stdio.h>
 /* Condition Code */
 
 void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
