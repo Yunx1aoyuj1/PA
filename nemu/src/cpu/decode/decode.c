@@ -42,7 +42,6 @@ static inline make_DopHelper(SI) {
   t0 =   instr_fetch(eip,op -> width);
   rtl_sext(&t0,&t0,op -> width);
   op -> simm = t0 ; 
-  printf("\n\n0x%x\n",op->simm);
   rtl_li(&op->val, op->simm);
 
 #ifdef DEBUG
