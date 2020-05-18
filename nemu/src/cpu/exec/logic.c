@@ -8,7 +8,6 @@ make_EHelper(test) {
 
 make_EHelper(and) {
   //TODO();
-  printf("\n0x%x 0x%x\n",id_dest-> val , id_src ->val);
   rtl_and(&t0 , &id_dest-> val , &id_src ->val);
   printf("\n0x%x\n",t0);
   operand_write(id_dest,&t0);
