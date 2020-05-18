@@ -9,15 +9,8 @@ make_EHelper(test) {
 make_EHelper(and) {
   //TODO();
   rtl_and(&t0 , &id_dest-> val , &id_src ->val);
-  
-  if(id_dest -> type == OP_TYPE_MEM){
-    rtl_sm(&(id_dest-> addr), id_dest -> width , &t0);
-  }
-  else if(id_dest -> type == OP_TYPE_REG){
-    rtl_sr(id_dest-> reg, id_dest -> width , &t0);
-  }
-
-  //cf -> t1 and of -> t2
+  operand_write(id_dest,&t0);
+  //cf <- 0 and of <- 0 
   t1 = 0;
   rtl_set_CF(&t1);
   rtl_set_OF(&t1);
