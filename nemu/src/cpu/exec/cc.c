@@ -1,5 +1,5 @@
 #include "cpu/rtl.h"
-
+#include<stdio.h>
 /* Condition Code */
 
 void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
@@ -22,6 +22,7 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
     }break;
     case CC_E:{
       rtl_get_ZF(dest);
+      printf("%d",*dest);
     }break;
     case CC_BE:{
       rtl_get_ZF(&t0);
