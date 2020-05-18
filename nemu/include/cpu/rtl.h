@@ -142,9 +142,9 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   //TODO();
   int32_t help = (int32_t)(*src1);
   t0 = (help) << (32 - 8*width);
-
+  t0 = t0 >> (32 - 8*width);
   printf("\n\n1:0x%x\n",t0);
-  *dest = t0 >> (32 - 8*width);
+  *dest = t0;
 }
 
 static inline void rtl_push(const rtlreg_t* src1) {
