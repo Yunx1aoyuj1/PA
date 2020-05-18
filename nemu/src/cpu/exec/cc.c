@@ -22,7 +22,7 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
     }break;
     case CC_E:{
       rtl_get_ZF(dest);
-      printf("%d",*dest);
+      printf("\n%x\n", cpu.eflags.Initial_Value);
     }break;
     case CC_BE:{
       rtl_get_ZF(&t0);
