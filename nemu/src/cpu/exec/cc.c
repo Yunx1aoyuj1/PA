@@ -47,7 +47,7 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
   }
 
   if (invert) {
-    t0 = 1;
-    rtl_xor(dest, dest, &t0);
+    rtl_xori(dest, dest, 1);
+    printf("%d\n",*dest);
   }
 }
