@@ -81,15 +81,17 @@ make_EHelper(shr) {
 
 make_EHelper(setcc) {
   uint8_t subcode = decoding.opcode & 0xf;
-  rtl_setcc(&t2, subcode);
-  operand_write(id_dest, &t2);
+  rtl_setcc(&t0, subcode);
+  operand_write(id_dest, &t0);
 
   print_asm("set%s %s", get_cc_name(subcode), id_dest->str);
 }
 
 make_EHelper(not) {
-  TODO();
-
+  //TODO();
+  rtl_li(&t0,id_dest-> val);
+  rtl_not(&t0);
+  operand_write(id_dest, &t0);
   print_asm_template1(not);
 }
 
