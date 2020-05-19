@@ -56,7 +56,7 @@ make_group(gp3,
     //EMPTY, EMPTY, EMPTY, EMPTY,
     //EMPTY, EMPTY, EMPTY, EMPTY
     //IDEX(test_I,test), EMPTY, EX(not), EX(neg),
-    EMPTY, EMPTY, EX(not), EMPTY,
+    IDEX(test_I,test), EMPTY, EX(not), EX(neg),
     EX(mul), EX(imul1), EX(div), EX(idiv))
 
   /* 0xfe */
