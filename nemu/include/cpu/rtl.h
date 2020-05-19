@@ -175,7 +175,6 @@ static inline void rtl_eq0(rtlreg_t* dest, const rtlreg_t* src1) {
     *dest = 0;
   }*/
   *dest = ( *src1 == 0 ? 1 : 0);
-  printf("dest:%d,src1:%d\n",*dest,*src1);
 }
 
 static inline void rtl_eqi(rtlreg_t* dest, const rtlreg_t* src1, int imm) {
@@ -208,7 +207,6 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
       t0 = (*result) & 0x0000ffff;
       break;
   }
-  printf("%d,%d,%d,",*result,width,t0);
   rtl_eq0(&t1,&t0);
   rtl_set_ZF(&t1);
 }
