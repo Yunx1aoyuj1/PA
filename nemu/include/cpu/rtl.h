@@ -168,7 +168,14 @@ static inline void rtl_pop(rtlreg_t* dest) {
 static inline void rtl_eq0(rtlreg_t* dest, const rtlreg_t* src1) {
   // dest <- (src1 == 0 ? 1 : 0)
   //TODO();
-  *dest = ( *src1 == 0 ? 1 : 0);
+  if(*src1 == 0){
+    *dest = 1;
+  }
+  else{
+    *dest = 0;
+  }
+  //*dest = ( *src1 == 0 ? 1 : 0);
+  printf("dest:%d,src1%d\n",*dest,*src1);
 }
 
 static inline void rtl_eqi(rtlreg_t* dest, const rtlreg_t* src1, int imm) {
@@ -192,7 +199,6 @@ static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
 static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   // eflags.ZF <- is_zero(result[width * 8 - 1 .. 0])
   //
-  printf("%d,%d\n",*result,width);
   switch (width){
     case 1 :
       t0 = (*result & 0x000000ff);
@@ -202,7 +208,6 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
       break;
   }
   rtl_eq0(&t1,&t0);
-  printf("%d\n",t1);
   rtl_set_ZF(&t1);
 }
 
