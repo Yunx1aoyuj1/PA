@@ -201,10 +201,10 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   //
   switch (width){
     case 1 :
-      t0 = (*result) & 0xff;
+      t0 = (*result) ^ 0x00;
       break;
     case 2 :
-      t0 = (*result) & 0xffff;
+      t0 = (*result) ^ 0x0000;
       break;
   }
   printf("%d,%d,%d,",*result,width,t0);
