@@ -8,12 +8,6 @@ make_EHelper(mov) {
 make_EHelper(push) {
   //TODO();
   rtl_push(&id_dest -> val);
-  if(id_dest -> type == OP_TYPE_REG){
-    rtl_sr(id_dest -> reg,id_dest-> width ,&t0);
-  }
-  else if (id_dest -> type == OP_TYPE_MEM){
-    rtl_sm(&id_dest -> addr,id_dest-> width ,&t0);
-  }
   print_asm_template1(push);
 }
 
