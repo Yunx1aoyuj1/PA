@@ -199,9 +199,9 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
     case 2 :
       t0 = (*result) & 0x0000ffff;
       break;
-    case 4 :
+    /*case 4 :
       t0 = (*result) & 0xffffffff;
-      break;
+      break;*/
   }
   rtl_eq0(&t1,&t0);
   rtl_set_ZF(&t1);
