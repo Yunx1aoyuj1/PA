@@ -77,6 +77,7 @@ static int cmd_info(char *args){
       for(int i = 0; i < 8;i ++)
       //i < 8,because : const char *regsl[] = {"eax", "ecx", "edx", "ebx", "esp", "ebp", "esi", "edi"};
         printf("%s:\t 0x%08x\t  %d\n", regsl[i], cpu.gpr[i]._32 , cpu.gpr[i]._32);
+      printf("eflags:  0x%08x\t  %d\n",cpu.eflags.Initial_Value, cpu.eflags.Initial_Value);  
       
   }
   else if (strcmp(token,"w") == 0){
