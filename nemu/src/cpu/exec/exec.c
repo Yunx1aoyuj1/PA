@@ -71,8 +71,8 @@ make_group(gp5,
 
   /* 0x0f 0x01*/
 make_group(gp7,
-    EMPTY, EMPTY, EMPTY, EMPTY,
-    EMPTY, EMPTY, EMPTY, EMPTY)
+    EX(inc), EX(dec), EX(call_rm), EX(call),
+    EX(jmp_rm), EX(jmp), EX(push), EMPTY)
 
 /* TODO: Add more instructions!!! */
 
