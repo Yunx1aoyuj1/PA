@@ -16,7 +16,8 @@ make_EHelper(and) {
   rtl_and(&t0 , &id_dest-> val , &id_src ->val);
   operand_write(id_dest,&t0);
   //cf <- 0 and of <- 0 
-  rtl_update_ZFSF(&id_dest -> val , id_dest -> width);
+  rtl_update_ZFSF(&t1 , id_dest -> width);
+  
   t1 = 0;
   rtl_set_CF(&t1);
   rtl_set_OF(&t1);
