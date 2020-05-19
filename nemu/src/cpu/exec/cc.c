@@ -21,8 +21,6 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
     }break;
     case CC_E:{
       rtl_get_ZF(dest);
-      printf("%d\n",*dest);
-      printf("%d\n",invert);
     }break;
     case CC_BE:{
       rtl_get_ZF(&t0);
