@@ -46,7 +46,6 @@ make_EHelper(or) {
   rtl_set_CF(&t0);
   rtl_set_OF(&t0);
   rtl_update_ZFSF(&t0, id_dest -> width);
-  printf("1");
   print_asm_template2(or);
 }
 
