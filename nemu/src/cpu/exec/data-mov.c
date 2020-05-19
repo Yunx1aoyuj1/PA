@@ -2,7 +2,6 @@
 
 make_EHelper(mov) {
   operand_write(id_dest, &id_src->val);
-  rtl_update_ZF(& id_dest -> val,id_dest -> width);
   print_asm_template2(mov);
 }
 
