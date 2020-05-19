@@ -162,7 +162,7 @@ void difftest_step(uint32_t eip) {
     printf("QUME.esp:0x%x,NUME.esp:0x%x\n",r.esp , cpu.esp);
     printf("QUME.ebp:0x%x,NUME.ebp:0x%x\n",r.ebp , cpu.ebp);
     printf("QUME.eip:0x%x,NUME.eip:0x%x\n",r.eip , cpu.eip);
-    printf("QUME.eflags:0x%x,NUME.eflags:0x%x\n",r.eflags, cpu.eflags.Initial_Value);
+    printf("QUME.eflags:0x%x,NUME.eflags:0x%x\n",(r.eflags & 0x00000ac1), cpu.eflags.Initial_Value);
   }
 
 
