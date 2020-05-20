@@ -45,8 +45,10 @@ uint32_t pio_read(ioaddr_t, int);
 void pio_write(ioaddr_t, int, uint32_t);
 
 make_EHelper(in) {
-  TODO();
-
+  //TODO();
+  t0 = pio_read(id_src -> val , id_dest -> width);
+  operand_write(id_dest,&t0);
+  diff_test_skip_qemu();
   print_asm_template2(in);
 
 #ifdef DIFF_TEST
@@ -55,8 +57,8 @@ make_EHelper(in) {
 }
 
 make_EHelper(out) {
-  TODO();
-
+  //TODO();
+  diff_test_skip_qemu();
   print_asm_template2(out);
 
 #ifdef DIFF_TEST
