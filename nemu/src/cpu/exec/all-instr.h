@@ -53,7 +53,6 @@ make_EHelper(cwtl);
 make_EHelper(movsx);
 make_EHelper(call_rm);
 make_EHelper(jmp_rm);
-make_EHelper(rol);
 
 make_EHelper(in);
 make_EHelper(out);
