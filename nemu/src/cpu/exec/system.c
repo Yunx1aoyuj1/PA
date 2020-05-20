@@ -58,6 +58,7 @@ make_EHelper(in) {
 
 make_EHelper(out) {
   //TODO();
+  pio_write(id_dest -> val , id_dest -> width , id_src -> val);
   diff_test_skip_qemu();
   print_asm_template2(out);
 
