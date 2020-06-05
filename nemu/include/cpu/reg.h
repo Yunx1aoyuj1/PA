@@ -58,6 +58,14 @@ typedef union {
       };
       uint32_t Initial_Value; 
     }eflags;
+    
+    rtlreg_t cs;
+    struct{
+      uint32_t base;
+      uint16_t limit;
+    }idtr;
+    
+
   };
   // this a linux 
 } CPU_state;

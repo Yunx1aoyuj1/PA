@@ -4,7 +4,7 @@ void diff_test_skip_qemu();
 void diff_test_skip_nemu();
 
 make_EHelper(lidt) {
-  TODO();
+  //TODO();
 
   print_asm_template1(lidt);
 }

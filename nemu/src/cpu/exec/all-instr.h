@@ -58,4 +58,5 @@ make_EHelper(in);
 make_EHelper(out);
 
 //pa3
+make_EHelper(lidt);
 make_EHelper(int);
