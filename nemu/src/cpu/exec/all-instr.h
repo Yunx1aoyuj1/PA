@@ -56,3 +56,6 @@ make_EHelper(jmp_rm);
 
 make_EHelper(in);
 make_EHelper(out);
+
+//pa3
+make_EHelper(int);
