@@ -5,8 +5,20 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   /* TODO: Trigger an interrupt/exception with ``NO''.
    * That is, use ``NO'' to index the IDT.
    */
-  TODO();
-  //printf("get a interrupt %d at address 0x%x\n",,ret_addr);
+  //TODO();
+  rtl_push(&cpu.eflags.Initial_Value);
+  rtl_push(&cpu.cs);
+  rtl_push(&ret_addr);
+  if(NO > cpu.idtr.limit)
+    assert(0);
+  
+  vaddr_t addr_of_gate = cpu.idtr.base + NO * 8;
+  uint32_t low,high;
+  low = vaddr_read(addr_of_gate,4) & 0x0000ffff;
+  high = vaddr_read(addr_of_gate + 4,4) & 0xffff0000;
+  decoding.jmp_eip = low | high;
+  decoding.is_jmp = 1;
+  printf("get a interrupt %d at address 0x%x\n",NO,ret_addr);
 }
 
 void dev_raise_intr() {
