@@ -60,3 +60,4 @@ make_EHelper(out);
 //pa3
 make_EHelper(int);
 make_EHelper(lidt);
+make_EHelper(pusha);
