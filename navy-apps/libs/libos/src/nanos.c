@@ -31,7 +31,7 @@ int _write(int fd, void *buf, size_t count){
 }
 
 void *_sbrk(intptr_t increment){
-  //return (void *)-1;
+  return (void *)-1;
   extern char end;
   static intptr_t p_break = (intptr_t)&end;
   intptr_t pre_p_break = p_break;
