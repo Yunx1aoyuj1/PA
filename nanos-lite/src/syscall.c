@@ -9,11 +9,11 @@ static inline uintptr_t sys_open(uintptr_t pathname, uintptr_t flags, uintptr_t 
   return 1;
 }
 
-static inline uintptr_t sys_write(uintptr_t fd, uintptr_t buf, uintptr_t len) {
+static inline uintptr_t sys_write(_RegSet *r,uintptr_t fd, uintptr_t buf, uintptr_t len) {
   //TODO();
-  
+  SYSCALL_ARG1(r) = fs_write(fd,(void *)buf,len);
   //fs_write(fd,(void *)buf,len);
-  return fs_write(fd,(void *)buf,len);
+  return 1;
 }
 
 static inline uintptr_t sys_read(uintptr_t fd, uintptr_t buf, uintptr_t len) {
@@ -61,7 +61,7 @@ _RegSet* do_syscall(_RegSet *r) {
       sys_exit(r);
       break;
     case SYS_write:
-      SYSCALL_ARG1(r) = sys_write(a[1],a[2],a[3]);
+      sys_write(r,a[1],a[2],a[3]);
       break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
