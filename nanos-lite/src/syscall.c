@@ -23,8 +23,7 @@ static inline uintptr_t sys_read(_RegSet *r, uintptr_t fd, uintptr_t buf, uintpt
 }
 
 static inline uintptr_t sys_lseek(_RegSet *r, uintptr_t fd, uintptr_t offset, uintptr_t whence) {
-  SYSCALL_ARG1(r) = fs_lseek(fd, offset, whence);
-  return 1;
+  return fs_lseek(fd, offset, whence);
 }
 
 static inline uintptr_t sys_close(_RegSet *r,uintptr_t fd) {
