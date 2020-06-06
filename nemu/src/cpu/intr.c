@@ -18,7 +18,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   high = vaddr_read(addr_of_gate + 4,4) & 0xffff0000;
   decoding.jmp_eip = low | high;
   decoding.is_jmp = 1;
-  printf("get a interrupt %d at address 0x%x\n",NO,ret_addr);
+  //printf("get a interrupt %d at address 0x%x\n",NO,ret_addr);
 }
 
 void dev_raise_intr() {
