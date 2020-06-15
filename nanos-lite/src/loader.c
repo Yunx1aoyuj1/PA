@@ -22,7 +22,7 @@ uintptr_t loader(_Protect *as, const char *filename) {
   
   for(int i = 0 ; i < count_of_page ; i++){
     pa = new_page();
-    Log("Map va to pa: 0x%08x to 0x%08x", va, pa);
+    //Log("Map va to pa: 0x%08x to 0x%08x", va, pa);
     _map(as, va, pa);
     fs_read(fd,pa,PGSIZE);
     va += PGSIZE;
