@@ -10,7 +10,7 @@ void init_device(void);
 void init_irq(void);
 void init_fs(void);
 uint32_t loader(_Protect *, const char *);
-
+void load_prog(const char *filename); 
 int main() {
 #ifdef HAS_PTE
   init_mm();
@@ -30,8 +30,8 @@ int main() {
 
   init_fs();
 
-  uint32_t entry = loader(NULL, "/bin/pal");
-  ((void (*)(void))entry)();
-  //load_prog("/bin/pal");
+  //uint32_t entry = loader(NULL, "/bin/pal");
+  //((void (*)(void))entry)();
+  load_prog("/bin/pal");
   panic("Should not reach here");
 }
