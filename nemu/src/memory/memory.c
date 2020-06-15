@@ -71,32 +71,53 @@ paddr_t page_translate(vaddr_t vaddr, bool writting){
 
 uint32_t vaddr_read(vaddr_t addr, int len) {
   if(cpu.cr0.paging) {
-      if ((((addr << 20) >> 20) + len) > 0x1000) {
-          //4k = 0x1000
-          /* this is a special case, you can handle it later. */
-          assert(0);
-      }
-      else {
-          paddr_t paddr = page_translate(addr,0);
-          return paddr_read(paddr, len);
-      }
+    if ((((addr << 20) >> 20) + len) > 0x1000) {
+      //4k = 0x1000
+      /* this is a special case, you can handle it later. */
+      //assert(0);
+      int fir_len,sec_len;
+      fir_len = 0x1000 - (addr & 0xfff);
+      sec_len = 0x1000 - fir_len;
+
+      uint32_t fir_addr = page_translate(addr , false);
+      uint32_t fir_mem  = paddr_read(fir_addr,fir_len);
+
+      uint32_t sec_addr = page_translate(addr + fir_len, false);
+      uint32_t sec_mem  = paddr_read(sec_addr,sec_len);
+
+      return fir_mem + (sec_mem << (fir_len << 3));
+    }
+    else {
+      paddr_t paddr = page_translate(addr,0);
+      return paddr_read(paddr, len);
+    }
   }
   else
-      return paddr_read(addr, len);
+    return paddr_read(addr, len);
 }
 
 void vaddr_write(vaddr_t addr, int len, uint32_t data) {
   //paddr_write(addr, len, data);
   if(cpu.cr0.paging) {
-      if ((((addr << 20) >> 20) + len) > 0x1000) {
-          //4k = 0x1000
-          /* this is a special case, you can handle it later. */
-          assert(0);
-      }
-      else {
-          paddr_t paddr = page_translate(addr,1);
-          return paddr_write(paddr, len, data);
-      }
+    if ((((addr << 20) >> 20) + len) > 0x1000) {
+      //4k = 0x1000
+      /* this is a special case, you can handle it later. */
+      //assert(0);
+      int fir_len,sec_len;
+      fir_len = 0x1000 - (addr & 0xfff);
+      sec_len = 0x1000 - fir_len;
+
+      uint32_t fir_addr = page_translate(addr , true);
+      paddr_write(fir_addr,fir_len,data);
+
+      uint32_t high_data = data >> (fir_len << 3);
+      uint32_t sec_addr = page_translate(addr + fir_len, true);
+      paddr_write(sec_addr,sec_len ,high_data);
+    }
+    else {
+      paddr_t paddr = page_translate(addr,1);
+      return paddr_write(paddr, len, data);
+    }
   }
   else
       return paddr_write(addr, len, data);
