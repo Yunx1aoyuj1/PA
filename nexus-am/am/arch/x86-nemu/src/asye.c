@@ -46,6 +46,7 @@ _RegSet *_make(_Area stack, void *entry, void *arg) {
 }
 
 void _trap() {
+  //irq_handle()
 }
 
 int _istatus(int enable) {
