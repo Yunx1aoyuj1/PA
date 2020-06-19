@@ -1,8 +1,8 @@
 #ifndef __COMMON_H__
 #define __COMMON_H__
 
-#define DEBUG
-#define DIFF_TEST
+//#define DEBUG
+//#define DIFF_TEST
 //volatile static int dummy = 0;
 /* You will define this macro in PA2 */
 #define HAS_IOE
