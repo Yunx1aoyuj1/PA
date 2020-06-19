@@ -82,6 +82,6 @@ void _unmap(_Protect *p, void *va) {
 
 _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *const argv[], char *const envp[]) {
   ustack . start = entry;
-  
-  return (_RegSet *) p -> ptr;
+  ustack . end = ustack .start + sizeof(entry);
+  return (_RegSet *) ustack .end;
 }
