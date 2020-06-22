@@ -5,7 +5,7 @@
 static PCB pcb[MAX_NR_PROC];
 static int nr_proc = 0;
 int schedule_count = 0;
-static int schedule_change_count = 400;
+static int schedule_change_count = 5000;
 
 PCB *current = NULL;
 
@@ -31,7 +31,7 @@ void load_prog(const char *filename) {
 }
 
 _RegSet* schedule(_RegSet *prev) {
-  
+
   current -> tf = prev;
   schedule_count ++;
   if((schedule_count >= schedule_change_count) && (current != &pcb[1])){
