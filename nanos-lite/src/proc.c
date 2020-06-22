@@ -4,8 +4,8 @@
 
 static PCB pcb[MAX_NR_PROC];
 static int nr_proc = 0;
-static uint32_t schedule_count = 0;
-static uint32_t schedule_change_count = 400;
+int schedule_count = 0;
+static int schedule_change_count = 400;
 
 PCB *current = NULL;
 
