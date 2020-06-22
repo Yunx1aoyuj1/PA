@@ -87,7 +87,7 @@ _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *cons
       *((uint32_t *)stack) = 0;
   }
  stack -=4;
-  *((uint32_t *)stack) = 0x00000002;//eflags
+  *((uint32_t *)stack) = 0x00000202;//eflags
  stack -=4;
   *((uint32_t *)stack) = 0x00000008;//cs
  stack -=4;
