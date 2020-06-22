@@ -34,9 +34,13 @@ _RegSet* schedule(_RegSet *prev) {
   current -> tf = prev;
   schedule_count ++;
   //current = &pcb[0];
-  if((schedule_count >= schedule_change_count)){
-    current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
+  if((schedule_count >= schedule_change_count) && (current != &pcb[1])){
+    current = &pcb[1];
     schedule_count = 0;
+  }
+  else{
+    
+    current = &pcb[0];
   }
   _switch(&(current -> as));
   return current -> tf;
