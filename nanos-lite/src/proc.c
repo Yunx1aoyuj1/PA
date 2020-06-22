@@ -31,6 +31,7 @@ void load_prog(const char *filename) {
 }
 
 _RegSet* schedule(_RegSet *prev) {
+  
   current -> tf = prev;
   schedule_count ++;
   if((schedule_count >= schedule_change_count) && (current != &pcb[1])){
@@ -38,7 +39,6 @@ _RegSet* schedule(_RegSet *prev) {
     schedule_count = 0;
   }
   else{
-    
     current = &pcb[0];
   }
   _switch(&(current -> as));
