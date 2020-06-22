@@ -81,7 +81,27 @@ void _unmap(_Protect *p, void *va) {
 }
 
 _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *const argv[], char *const envp[]) {
-  ustack . start = entry;
-  ustack . end = ustack .start + sizeof(entry);
-  return (_RegSet *) ustack .end;
+  uintptr_t stack = (uintptr_t) ustack.end;
+  for(int i = 0 ;i < 3 ; i ++){
+      stack -= 4;
+      *((uint32_t *)stack) = 0;
+  }
+ stack -=4;
+  *((uint32_t *)stack) = 0x02;//eflags
+ stack -=4;
+  *((uint32_t *)stack) = 0x08;//cs
+ stack -=4;
+  *((uint32_t *)stack) = (uint32_t)entry;//eip
+ stack -=4;
+  *((uint32_t *)stack) = 0x0;//error code
+ stack -=4;
+  *((uint32_t *)stack) = 0x81;//irq
+
+//regest
+  for(int i = 0 ; i < 8 ; i ++){
+    stack -= 4;
+    *((uint32_t *)stack) = 0;
+  }
+
+  return (_RegSet *)stack;
 }
